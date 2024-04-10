@@ -13,18 +13,18 @@ const fs = require('fs');
   await page.goto(googleUrl);
   await page.waitForSelector('[jstcache="3"]');
 
-  const scrollable = await page.$('xpath=/html/body/div[2]/div[3]/div[8]/div[9]/div/div/div[1]/div[2]/div/div[1]/div/div/div[1]/div[1]');
-  if (!scrollable) {
-    console.log('Scrollable element not found.');
-    await browser.close();
-    return;
-  }
+  // const scrollable = await page.$('xpath=/html/body/div[2]/div[3]/div[8]/div[9]/div/div/div[1]/div[2]/div/div[1]/div/div/div[1]/div[1]');
+  // if (!scrollable) {
+  //   console.log('Scrollable element not found.');
+  //   await browser.close();
+  //   return;
+  // }
 
-  let endOfList=false;
-  while (!endOfList) {
-    await scrollable.evaluate(node => node.scrollBy(0,50000));
-    endOfList = await page.evaluate(()=>document.body.innerText.includes("You've reached the end of the list"));
-  }
+  // let endOfList=false;
+  // while (!endOfList) {
+  //   await scrollable.evaluate(node => node.scrollBy(0,50000));
+  //   endOfList = await page.evaluate(()=>document.body.innerText.includes("You've reached the end of the list"));
+  // }
 
   const urls = await page.$$eval('a', links => links.map(link => link.href).filter(href => href.startsWith('https://www.google.com/maps/place/')));
 
