@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "playwright": "^1.43.0"
+  }
+}
