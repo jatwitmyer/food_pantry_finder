@@ -52,7 +52,7 @@ const fs = require('fs');
     // const hoursElement = await newPage.$('xpath=/html/body/div[1]/div[3]/div[8]/div[9]/div/div/div[1]/div[2]/div/div[1]/div/div/div[7]/div[4]/div[2]');
     // console.log(hoursElement) //returns null
     // let hours = hoursElement ? await newPage.evaluate(element => element.textContent,hoursElement):'';
-    // hours = `"${hours}"`;
+    const hours = "";
 
     const addressElement=await newPage.$('button[data-tooltip="Copy address"]');
     let address=addressElement?await newPage.evaluate(element=>element.textContent,addressElement):'';
