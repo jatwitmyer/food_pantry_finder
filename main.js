@@ -46,13 +46,16 @@ const fs = require('fs');
     reviews=`"${reviews}"`;
 
     const categoryElement=await newPage.$('xpath=/html/body/div[2]/div[3]/div[8]/div[9]/div/div/div[1]/div[2]/div/div[1]/div/div/div[2]/div/div[1]/div[2]/div/div[2]/span/span/button');
+    console.log(categoryElement)
     let category=categoryElement?await newPage.evaluate(element=>element.textContent,categoryElement):'';
     category=`"${category}"`;
 
-    // const hoursElement = await newPage.$('xpath=/html/body/div[1]/div[3]/div[8]/div[9]/div/div/div[1]/div[2]/div/div[1]/div/div/div[7]/div[4]/div[2]');
-    // console.log(hoursElement) //returns null
-    // let hours = hoursElement ? await newPage.evaluate(element => element.textContent,hoursElement):'';
-    const hours = "";
+    const hoursElement = await newPage.$('#QA0Szd > div > div > div.w6VYqd > div:nth-child(2) > div > div.e07Vkf.kA9KIf > div > div > div:nth-child(7) > div.OqCZI.fontBodyMedium.WVXvdc > div.t39EBf.GUrTXd');
+    let hours = hoursElement ? await newPage.evaluate(element => {
+      console.log(element.getAttribute('aria-label'))
+      return element.getAttribute('aria-label')
+    }):'';
+    hours = `"${hours}"`;
 
     const addressElement=await newPage.$('button[data-tooltip="Copy address"]');
     let address=addressElement?await newPage.evaluate(element=>element.textContent,addressElement):'';
@@ -65,7 +68,7 @@ const fs = require('fs');
     const phoneElement=await newPage.$('button[data-tooltip="Copy phone number"]');
     let phone=phoneElement?await newPage.evaluate(element=>element.textContent,phoneElement):'';
     phone=`"${phone}"`;
-
+    
     url=`"${url}"`;
 
     await newPage.close();
