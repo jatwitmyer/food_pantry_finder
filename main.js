@@ -76,7 +76,7 @@ const fs = require('fs');
   const results=[];
   for(let i=0; i<urls.length; i+=batchSize) {
     const batchUrls = urls.slice(i,i+batchSize);
-    const batchResults = await Promise.all(batchUrls.map(url => scrapePageData(url)));
+    const batchResults = await Promise.all(batchUrls.map(url => scrapePageData(url))); //times out on coop's computer
     results.push(...batchResults);
     console.log(`Batch ${i/batchSize+1} completed.`);
   }
