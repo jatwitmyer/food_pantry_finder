@@ -31,7 +31,6 @@ fs.createReadStream('/home/clindsley/Development/Food/food_pantry_finder/pantrie
     `;
 
     data.forEach((row) => {
-        console.log(row);
       htmlContent += `
         <li>
           <div>
