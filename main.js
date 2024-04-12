@@ -57,49 +57,6 @@ const fs = require('fs');
     // let category=categoryElement?await newPage.evaluate(element=>element.textContent,categoryElement):'';
     // category=`"${category}"`;
 
-    // SELECTING HOURS
-
-    // // Wait for the element containing the hours to appear on the page
-    // await newPage.waitForSelector('#QA0Szd > div > div > div.w6VYqd > div.bJzME.tTVLSc > div > div.e07Vkf.kA9KIf > div > div > div:nth-child(7) > div.OqCZI.fontBodyMedium.WVXvdc > div.OMl5r.hH0dDd > div.MkV9 > div.o0Svhf');
-
-    // // Select the element
-    // const hoursElement = await newPage.$('#QA0Szd > div > div > div.w6VYqd > div.bJzME.tTVLSc > div > div.e07Vkf.kA9KIf > div > div > div:nth-child(7) > div.OqCZI.fontBodyMedium.WVXvdc > div.OMl5r.hH0dDd > div.MkV9 > div.o0Svhf');
-
-    // // Extract the text content of the element
-    // let hours = hoursElement
-    //   ? await newPage.evaluate((element) => element.textContent, hoursElement)
-    //   : '';
-
-    // Click on the button or perform the action that reveals the hours
-    // await newPage.click('#QA0Szd > div > div > div.w6VYqd > div.bJzME.tTVLSc > div > div.e07Vkf.kA9KIf > div > div > div:nth-child(7) > div.OqCZI.fontBodyMedium.WVXvdc > div.OMl5r.hH0dDd > div.MkV9 > div.o0Svhf');
-    
-    // Wait for the element containing the hours to appear on the page
-    // await newPage.waitForSelector('.t39EBf GUrTXd');
-
-    // Select the element
-    // const hoursElement = await newPage.$('.t39EBf GUrTXd');
-
-    // Extract the aria-label attribute of the element
-    // let hours = hoursElement
-    //   ? await newPage.evaluate((element) => element.getAttribute('aria-label'), hoursElement)
-    //   : '';
-
-
-
-
-    // const hoursElement = await newPage.locator('xpath=//*[@id="QA0Szd"]/div/div/div[1]/div[2]/div/div[1]/div/div/div[7]/div[4]')
-    // // .('div[aria-label]');
-    // if (!hoursElement) {
-    //   console.log('Hours element not found.')
-    // }
-    // else {
-    //   console.log(hoursElement);
-    // }
-    // let hours = hoursElement ? await newPage.evaluate(element => element.getAttribute('aria-label'), hoursElement):'';
-    // // hours = `"${hours}"`;
-    // console.log(hours)
-  //   let hours = '';
-
   //   const addressElement=await newPage.$('button[data-tooltip="Copy address"]');
   //   let address=addressElement?await newPage.evaluate(element=>element.textContent,addressElement):'';
   //   address=`"${address}"`;
