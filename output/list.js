@@ -31,13 +31,14 @@ fs.createReadStream('/home/clindsley/Development/Food/food_pantry_finder/pantrie
     `;
 
     data.forEach((row) => {
+      let hours = row.Hours.replace('Hide open hours for the week', '');
       htmlContent += `
         <li>
           <div>
             <h3 style="margin-bottom: 0; padding-bottom: 0;"><strong>${row.Name}</strong></h3>
             <div>Address: ${row.Address}</div>
             <div>&nbsp;</div>
-            <div>Hours: ${row.Hours}</div>
+            <div>Hours: ${hours}</div>
             <p>Phone: ${row.Phone}
               <br />
               <span>
