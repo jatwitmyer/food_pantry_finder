@@ -12,7 +12,7 @@ fs.createReadStream('/home/clindsley/Development/Food/food_pantry_finder/pantrie
       <!DOCTYPE html>
       <html>
       <head>
-          <title>Weekly Schedule</title>
+          <title>Local Food Pantries Weekly Schedule</title>
           <style>
               table {
                   width: 100%;
@@ -34,15 +34,15 @@ fs.createReadStream('/home/clindsley/Development/Food/food_pantry_finder/pantrie
       htmlContent += `
         <li>
           <div>
-            <h3 style="margin-bottom: 0; padding-bottom: 0;"><strong>${row.name}</strong></h3>
-            <div>Address: ${row.address}</div>
+            <h3 style="margin-bottom: 0; padding-bottom: 0;"><strong>${row.Name}</strong></h3>
+            <div>Address: ${row.Address}</div>
             <div>&nbsp;</div>
-            <div>Hours: ${row.hours}</div>
-            <p>Phone: ${row.phone}
+            <div>Hours: ${row.Hours}</div>
+            <p>Phone: ${row.Phone}
               <br />
               <span>
                 Website:
-                <a href="${row.website}">${row.website}</a>
+                <a href="${row.Website}">${row.Website}</a>
               </span>
             </p>
           </div>
