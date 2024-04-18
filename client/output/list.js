@@ -3,7 +3,7 @@ const csv = require('csv-parser');
 
 // Read the CSV file and parse it into a JavaScript object
 const data = [];
-fs.createReadStream('/home/clindsley/Development/Food/food_pantry_finder/pantries.csv')
+fs.createReadStream('server/pantries.csv')
   .pipe(csv())
   .on('data', (row) => data.push(row))
   .on('end', () => {
