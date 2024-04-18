@@ -6,7 +6,7 @@ Our goal is to provide a tool to quickly locate food pantries and organize the i
 
 Currently, if a person needs assistance in finding food services, they must do so over the phone with 2-1-1 or through an established connection with a social worker. These methods are reliable sources of care, but are time-consuming for the user, and hunger can't wait. We seek to expedite the search process with an easy-to-use tool that anyone with an internet connection can access.
 
-Our program utilizes web-scraping to collect and organize data from google maps. We offer two visualizations of the data: a list and a weekly schedule. A user can choose to save the information as a PDF for future.
+Our program utilizes web-scraping to collect and organize data from google maps. We offer two visualizations of the data: a list and a weekly schedule. A user can choose to save the information as a PDF for future reference.
 
 ## Prototype Demonstration
 ### List
