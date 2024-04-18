@@ -2,7 +2,7 @@
 *By Cooper Lindsley and Jessica Twitmyer*
 
 ## Mission
-Our goal is to provide a tool to quickly locate food pantries in organize the information into a PDF. We want to make it easy for people to find the resources they need to feed themselves and their families.
+Our goal is to provide a tool to quickly locate food pantries and organize the information into a PDF. We want to make it easy for people to find the resources they need to feed themselves and their families.
 
 Currently, if a person needs assistance in finding services, they must do so over the phone with 2-1-1 or through an established connection with a social worker. These methods are reliable sources of care, but are time-consuming for the user, and hunger can't wait. We seek to expedite the search process with an easy-to-use tool that anyone with an internet connection can access.
 
