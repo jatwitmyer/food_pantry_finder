@@ -5,10 +5,13 @@ const fs = require('fs');
 
 (async () => {
   nameSheet ='pantries.csv';
-  googleUrl ='https://www.google.com/maps/search/food+pantries/@28.1447894,-82.4283315,12z/data=!3m1!4b1?entry=ttu'
+  googleUrl ='https://www.google.com/maps/search/food+pantries/@40.0489974,-76.3710216,12z?entry=ttu' //lancaster (also the template for any search - just change the coordinates)
+  // googleUrl ='https://www.google.com/maps/search/food+pantries/@28.1447894,-82.4283315,12z/data=!3m1!4b1?entry=ttu' //tampa
   console.time("Execution Time");
 
   const browser = await chromium.launch({headless:true});
+  const context = await browser.newContext();
+  context.setDefaultTimeout(10000); // Set default timeout to 10 seconds
   const page = await browser.newPage();
   await page.goto(googleUrl);
   await page.waitForSelector('[jstcache="3"]');
@@ -35,62 +38,89 @@ const fs = require('fs');
     await newPage.goto(url);
     await newPage.waitForSelector('[jstcache="3"]');
 
-    const nameElement = await newPage.locator('[class="DUwDvf lfPIob"]')
-    let name = nameElement ? await nameElement.evaluate(element => element.textContent) : '';
-    name = `"${name}"`;
-    // console.log(name);
-
-    const hoursElement = await newPage.locator('[class="t39EBf GUrTXd"]')
-    let hours = hoursElement ? await hoursElement.evaluate(element => element.ariaLabel) : '';
-    hours = `"${hours}"`;
-    console.log(`Name: ${name}, Hours: ${hours}`);
-
-    // const ratingElement=await newPage.$('xpath=/html/body/div[2]/div[3]/div[8]/div[9]/div/div/div[1]/div[2]/div/div[1]/div/div/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/span[1]/span[1]');
-    // let rating=ratingElement?await newPage.evaluate(element=>element.textContent,ratingElement):'';
-    // rating=`"${rating}"`;
-
-    // const reviewsElement=await newPage.$('xpath=/html/body/div[2]/div[3]/div[8]/div[9]/div/div/div[1]/div[2]/div/div[1]/div/div/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/span[2]/span/span');let reviews=reviewsElement?await newPage.evaluate(element=>element.textContent,reviewsElement):'';
-    // reviews=reviews.replace(/\(|\)/g,'');
-    // reviews=`"${reviews}"`;
-
-    // const categoryElement=await newPage.$('xpath=/html/body/div[2]/div[3]/div[8]/div[9]/div/div/div[1]/div[2]/div/div[1]/div/div/div[2]/div/div[1]/div[2]/div/div[2]/span/span/button');
-    // let category=categoryElement?await newPage.evaluate(element=>element.textContent,categoryElement):'';
-    // category=`"${category}"`;
-
-  //   const addressElement=await newPage.$('button[data-tooltip="Copy address"]');
-  //   let address=addressElement?await newPage.evaluate(element=>element.textContent,addressElement):'';
-  //   address=`"${address}"`;
-
-  //   const websiteElement=await newPage.$('a[data-tooltip="Open website"]')||await newPage.$('a[data-tooltip="Open menu link"]');
-  //   let website=websiteElement?await newPage.evaluate(element=>element.getAttribute('href'),websiteElement):'';
-  //   website=`"${website}"`;
-
-  //   const phoneElement=await newPage.$('button[data-tooltip="Copy phone number"]');
-  //   let phone=phoneElement?await newPage.evaluate(element=>element.textContent,phoneElement):'';
-  //   phone=`"${phone}"`;
+    let name = '';
+    try {
+      const nameElement = await newPage.locator('[class="DUwDvf lfPIob"]')
+      name = nameElement ? await nameElement.evaluate(element => element.textContent) : '';
+      name = `"${name}"`;
+      console.log(name);
+    }
+    catch {
+      console.log(`Error finding name: ${url}`);
+    }
     
-  //   url=`"${url}"`;
+    let address = '';
+    try {
+    const addressElement = await newPage.locator('[data-item-id="address"]')
+    address = addressElement ? await addressElement.evaluate(element => element.textContent.slice(1)) : '';
+    address = `"${address}"`;
+    console.log(`Address: ${address}`);
+    }
+    catch {
+      console.log(`Error finding address: ${url}`);
+    }
+
+    let hours = '';
+    try {
+      const hoursElement = await newPage.locator('div.t39EBf.GUrTXd')
+      hours = hoursElement ? await hoursElement.evaluate(element => element.ariaLabel) : '';
+      hours = `"${hours}"`;
+      console.log(hours);
+    }
+    catch {
+      console.log(`Error finding hours: ${url}`);
+    }
+
+    let phone = '';
+    try {
+    const phoneElement = await newPage.locator('[data-tooltip="Copy phone number"]').first()
+    phone = phoneElement ? await phoneElement.evaluate(element => element.textContent.slice(1)) : '';
+    phone = `"${phone}"`;
+    console.log(`Phone: ${phone}`);
+    }
+    catch {
+      console.log(`Error finding phone: ${url}`);
+    }
+
+    let website = '';
+    try {
+    const websiteElement = await newPage.locator('[data-tooltip="Open website"]').first()
+    website = websiteElement ? await websiteElement.evaluate(element => element.href) : '';
+    website = `"${website}"`;
+    console.log(`Website: ${website}`);
+    }
+    catch {
+      console.log(`Error finding website: ${url}`);
+    }
+
+    let rating = '';
+    try {
+    const ratingElement = await newPage.locator('span.ceNzKf[aria-label]').first()
+    rating = ratingElement ? await ratingElement.evaluate(element => element.ariaLabel.slice(0,9)) : '';
+    rating = `"${rating}"`;
+    console.log(`Rating: ${rating}`);
+    }
+    catch {
+      console.log(`Error finding rating: ${url}`);
+    }
+    
+    url=`"${url}"`;
 
     await newPage.close();
-    return{name, hours};
-    // return{name,rating,reviews,category,hours,address,website,phone,url};
+    return{name,address,hours,phone,website,rating,url};
   };
 
   const batchSize=5;
   const results=[];
   for(let i=0; i<urls.length; i+=batchSize) {
     const batchUrls = urls.slice(i,i+batchSize);
-    const batchResults = await Promise.all(batchUrls.map(url => scrapePageData(url)));
+    const batchResults = await Promise.all(batchUrls.map(url => scrapePageData(url))); //times out on coop's computer
     results.push(...batchResults);
     console.log(`Batch ${i/batchSize+1} completed.`);
   }
 
-  // const csvHeader='Name,Address,Hours,Phone,Website,Rating,Url\n';
-  // const csvRows=results.map(r=>`${r.name},${r.address},${r.hours},${r.phone},${r.website},${r.rating},${r.url}`).join('\n');
-  // fs.writeFileSync(nameSheet,csvHeader+csvRows);
-
-  const csvHeader='Name,Hours\n';
-  const csvRows=results.map(r=>`${r.name},${r.hours}`).join('\n');
+  const csvHeader='Name,Address,Hours,Phone,Website,Rating,Url\n';
+  const csvRows=results.map(r=>`${r.name},${r.address},${r.hours},${r.phone},${r.website},${r.rating},${r.url}`).join('\n');
   fs.writeFileSync(nameSheet,csvHeader+csvRows);
   
   await browser.close();
