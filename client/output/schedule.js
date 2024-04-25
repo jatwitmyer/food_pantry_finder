@@ -21,6 +21,14 @@ fs.createReadStream('../../server/pantries.csv')
         const dom = new JSDOM(html);
         const document = dom.window.document;
         const tableData = document.querySelector('.table-data');
+        tableData.innerHTML = `
+        <td class="Sunday"></td>
+        <td class="Monday"></td>
+        <td class="Tuesday"></td>
+        <td class="Wednesday"></td>
+        <td class="Thursday"></td>
+        <td class="Friday"></td>
+        <td class="Saturday"></td>`; //reset the table
 
         data.forEach((row) => { //for each row from the csv
             //find the hours for that day and put it in the table if they're not closed
@@ -59,18 +67,21 @@ fs.createReadStream('../../server/pantries.csv')
                     cardHeader.append(nameSpan);
                     div.append(cardHeader);
                     
-                    const addressP = document.createElement('p')
-                    addressP.className = "address";
-                    const addressSub = document.createElement('span');
-                    addressSub.textContent = "Address: ";
-                    addressSub.className = "pantry-card-subheader";
-                    addressP.append(addressSub);
-                    const addressBody = document.createElement('span');
-                    addressBody.textContent = `${row.Address}`;
-                    addressBody.className = "address";
-                    addressP.append(addressBody);
-                    div.append(addressP);
+                    if (row.Address) {
+                      const addressP = document.createElement('p')
+                      addressP.className = "address";
+                      const addressSub = document.createElement('span');
+                      addressSub.textContent = "Address: ";
+                      addressSub.className = "pantry-card-subheader";
+                      addressP.append(addressSub);
+                      const addressBody = document.createElement('span');
+                      addressBody.textContent = `${row.Address}`;
+                      addressBody.className = "address";
+                      addressP.append(addressBody);
+                      div.append(addressP);
+                    }
 
+                    if (row.Phone) {
                     const phoneP = document.createElement('p')
                     phoneP.className = "phone";
                     const phoneSub = document.createElement('span');
@@ -82,7 +93,9 @@ fs.createReadStream('../../server/pantries.csv')
                     phoneBody.className = "phone";
                     phoneP.append(phoneBody);
                     div.append(phoneP);
+                    }
 
+                    if (row.Website) {
                     const websiteP = document.createElement('p')
                     websiteP.className = "website";
                     const websiteSub = document.createElement('span');
@@ -94,7 +107,9 @@ fs.createReadStream('../../server/pantries.csv')
                     websiteBody.className = "website";
                     websiteP.append(websiteBody);
                     div.append(websiteP);
+                    }
                     
+                    if (row.Rating) {
                     const ratingP = document.createElement('p')
                     ratingP.className = "rating";
                     const ratingSub = document.createElement('span');
@@ -106,6 +121,7 @@ fs.createReadStream('../../server/pantries.csv')
                     ratingBody.className = "rating";
                     ratingP.append(ratingBody);
                     div.append(ratingP);
+                    }
                     
                     dayCell.append(div);
                     console.log("Added pantry to table")

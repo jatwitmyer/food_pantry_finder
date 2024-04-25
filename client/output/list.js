@@ -23,6 +23,17 @@ fs.createReadStream('../../server/pantries.csv')
                   padding: 15px;
                   text-align: center;
               }
+              p {
+                margin: 5px;
+                margin-left: 10px;
+              }
+              div {
+                margin-bottom: 30px;
+              }
+              .hours {
+                margin: 15px;
+                margin-left: 10px;
+              }
           </style>
       </head>
       <body>
@@ -35,27 +46,41 @@ fs.createReadStream('../../server/pantries.csv')
       htmlContent += `
         <li>
           <div>
-            <h3 style="margin-bottom: 0; padding-bottom: 0;"><strong>${row.Name}</strong></h3>
-            <div>Address: ${row.Address}</div>
-            <div>&nbsp;</div>
-            <div>Hours: ${hours}</div>
-            <p>Phone: ${row.Phone}
-              <br />
-              <span>
-                Website:
+            <h3 style="margin-bottom: 0; padding-bottom: 0;"><strong>${row.Name}</strong></h3>`
+      if (row.Address) {
+        htmlContent += `
+            <p><b>Address:</b> ${row.Address}</p>`
+      }
+
+      if (row.Hours) {
+        htmlContent += `
+            <p class="hours"><b>Hours:</b> ${hours}</p>`
+      }
+
+      if (row.Phone) {
+        htmlContent += `
+            <p><b>Phone:</b> ${row.Phone} <p>`
+      }
+
+      if (row.Website) {
+        htmlContent += `
+              <p>
+                <b>Website:</b>
                 <a href="${row.Website}">${row.Website}</a>
-              </span>
-            </p>
+              </p>`
+      }
+
+      htmlContent += `
           </div>
         </li>
       `;
     });
 
     htmlContent += `
-          </ul>
-      </body>
-      </html>
-    `;
+    </ul>
+    </body>
+    </html>
+    `
 
     // Write the generated HTML content to an HTML file
     fs.writeFile('output.html', htmlContent, (err) => {
