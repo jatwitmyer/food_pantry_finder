@@ -29,6 +29,5 @@ Our program utilizes web-scraping to collect and organize data from google maps.
   1. npm install
     -requires node.js
 
-### Run the Program
-  1. cd scrape
-  2. npm run scrape
+## Run the Program
+  1. npm run scrape

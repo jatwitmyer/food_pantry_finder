@@ -7,6 +7,9 @@ const { JSDOM } = jsdom;
 
 const data = [];
 
+if (!process.cwd().includes('scrape')) {
+  process.chdir('./scrape');
+}
 fs.createReadStream('./pantries.csv')
   .pipe(csv())
   .on('data', (row) => {
@@ -14,10 +17,6 @@ fs.createReadStream('./pantries.csv')
   })
 
   .on('end', () => {
-    console.log('Current directory:', process.cwd())
-    if (!process.cwd().includes('scrape')) {
-      process.chdir('./scrape');
-    }
     // console.log(data) //an array of objects with keys Name, Address, Hours, Phone, Website, Rating, Url
     fs.readFile('schedule.html', 'utf8', function(err, html){
         if (err) throw err;

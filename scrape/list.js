@@ -3,6 +3,9 @@ const csv = require('csv-parser');
 
 // Read the CSV file and parse it into a JavaScript object
 const data = [];
+if (!process.cwd().includes('scrape')) {
+  process.chdir('./scrape');
+}
 fs.createReadStream('./pantries.csv')
   .pipe(csv())
   .on('data', (row) => data.push(row))

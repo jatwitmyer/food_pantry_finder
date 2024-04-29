@@ -4,14 +4,14 @@ const{chromium} = require('playwright');
 const fs = require('fs');
 
 (async () => {
-  fs.writeFile('pantries.csv', '', err => {
+  fs.writeFile('scrape/pantries.csv', '', err => {
     if (err) {
       console.error('Error while clearing the file:', err);
     } else {
       console.log('File cleared successfully');
     }
   });
-  nameSheet ='pantries.csv';
+  nameSheet ='scrape/pantries.csv';
   // googleUrl ='https://www.google.com/maps/search/food+pantries/@40.0489974,-76.3710216,12z?entry=ttu' //lancaster (also the template for any search - just change the coordinates)
   // googleUrl ='https://www.google.com/maps/search/food+pantries/@28.1447894,-82.4283315,12z/data=!3m1!4b1?entry=ttu' //tampa
   // googleUrl ='https://www.google.com/maps/search/food+pantries/@39.742043,-104.991531,12z?entry=ttu' //denver
