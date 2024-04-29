@@ -3,7 +3,7 @@ const csv = require('csv-parser');
 
 // Read the CSV file and parse it into a JavaScript object
 const data = [];
-fs.createReadStream('../../server/pantries.csv')
+fs.createReadStream('./pantries.csv')
   .pipe(csv())
   .on('data', (row) => data.push(row))
   .on('end', () => {
@@ -85,6 +85,6 @@ fs.createReadStream('../../server/pantries.csv')
     // Write the generated HTML content to an HTML file
     fs.writeFile('output.html', htmlContent, (err) => {
       if (err) throw err;
-      console.log('The file has been saved!');
+      console.log('list.html has been saved!');
     });
   });

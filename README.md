@@ -25,21 +25,10 @@ Our program utilizes web-scraping to collect and organize data from google maps.
 - Allow user to input their location and distance to personalize search results.
 - Allow user to edit the data for inaccuracies or missing details.
 
-## Installation and Use
-### Installation sequence
-  1. node.js
-  2. npm install playwright
-  3. npx playwright install --with-deps (requires sudo code)
-  4. npm install fs
+## Install Dependencies
+  1. npm install
+    -requires node.js
 
-### Running the Program:
-  1. cd server
-  2. node main.js
-    -this will take a few minutes to run
-  3. cd ..
-  4. cd client
-  5. cd output
-  6. node list.js
-  7. open output.html
-  8. node schedule.js
-  9. open schedule.html
+### Run the Program
+  1. cd scrape
+  2. npm run scrape

@@ -7,13 +7,17 @@ const { JSDOM } = jsdom;
 
 const data = [];
 
-fs.createReadStream('../../server/pantries.csv')
+fs.createReadStream('./pantries.csv')
   .pipe(csv())
   .on('data', (row) => {
     data.push(row);
   })
 
   .on('end', () => {
+    console.log('Current directory:', process.cwd())
+    if (!process.cwd().includes('scrape')) {
+      process.chdir('./scrape');
+    }
     // console.log(data) //an array of objects with keys Name, Address, Hours, Phone, Website, Rating, Url
     fs.readFile('schedule.html', 'utf8', function(err, html){
         if (err) throw err;
@@ -124,7 +128,7 @@ fs.createReadStream('../../server/pantries.csv')
                     }
                     
                     dayCell.append(div);
-                    console.log("Added pantry to table")
+                    // console.log("Added pantry to table")
                   }
                 } 
               });
@@ -134,6 +138,7 @@ fs.createReadStream('../../server/pantries.csv')
 
         fs.writeFile('schedule.html', dom.serialize(), function(err){
             if (err) throw err;
+            console.log('schedule.html has been saved!');
         });
     });
   });
