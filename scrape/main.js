@@ -3,10 +3,30 @@
 const{chromium} = require('playwright');
 const fs = require('fs');
 
+async function fetchLocation() {
+  fs.readFile('scrape/latlong.csv', 'utf8', (err, location) => {
+    if (err) {
+      console.error('Error while reading latlong.csv:', err);
+    }
+    else {
+      console.log('File read successfully');
+      console.log(location);
+      location = location.replace("(", "");
+      location = location.replace(")", "");
+      location = location.replaceAll('"', "");
+      location = location.replace(/\s+/g, '')
+      console.log(location);
+      googleUrl = `https://www.google.com/maps/search/food+pantries/@${location},12z?entry=ttu`;
+      return googleUrl
+    }
+  });
+}
+
 (async () => {
+  googleUrl = await fetchLocation();
   fs.writeFile('scrape/pantries.csv', '', err => {
     if (err) {
-      console.error('Error while clearing the file:', err);
+      console.error('Error while clearing pantries.csv:', err);
     } else {
       console.log('File cleared successfully');
     }
@@ -16,14 +36,21 @@ const fs = require('fs');
   // googleUrl ='https://www.google.com/maps/search/food+pantries/@28.1447894,-82.4283315,12z/data=!3m1!4b1?entry=ttu' //tampa
   // googleUrl ='https://www.google.com/maps/search/food+pantries/@39.742043,-104.991531,12z?entry=ttu' //denver
   // googleUrl ='https://www.google.com/maps/search/food+pantries/@39.952583,-75.165222,12z?entry=ttu' //philadephia
-  googleUrl ='https://www.google.com/maps/search/food+pantries/@29.6636297,-82.3576781,12z?entry=ttu' //gainesville
+  // googleUrl ='https://www.google.com/maps/search/food+pantries/@29.6636297,-82.3576781,12z?entry=ttu' //gainesville
+  // console.log(googleUrl)
 
   console.time("Execution Time");
 
   const browser = await chromium.launch({headless:true});
+  if (browser) {
+    console.log('Browser opened.');
+  }
   const context = await browser.newContext();
   context.setDefaultTimeout(10000); // Set default timeout to 10 seconds
   const page = await browser.newPage();
+  if (page) {
+    console.log(googleUrl)
+  }
   await page.goto(googleUrl);
   await page.waitForSelector('[jstcache="3"]');
 

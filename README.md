@@ -25,8 +25,9 @@ Our program utilizes web-scraping to collect and organize data from google maps.
 - Allow user to input their location and distance to personalize search results.
 - Allow user to edit the data for inaccuracies or missing details.
 
-## Install Dependencies (requires node)
+## Install Dependencies (requires node.js and pipenv)
   1. npm install
+  2. pipenv install
 
 ## Run the Program
   1. npm run scrape
