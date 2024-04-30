@@ -11,7 +11,8 @@
       "mocha": "10.4.0"
   },
   "scripts": {
-    "scrape": "node scrape/main.js && node scrape/list.js && node scrape/schedule.js",
+    "location": "python scrape/location.py",
+    "scrape": "python scrape/location.py node scrape/main.js && node scrape/list.js && node scrape/schedule.js",
     "organize": "node scrape/list.js && node scrape/schedule.js",
     "test": "npx mocha test/**/*.spec.js --timeout 60000"
   }
