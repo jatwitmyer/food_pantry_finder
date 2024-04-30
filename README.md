@@ -31,3 +31,7 @@ Our program utilizes web-scraping to collect and organize data from google maps.
 
 ## Run the Program
   1. npm run scrape
+
+The files created by the program are located in:
+  -output.html
+  -schedule.html
