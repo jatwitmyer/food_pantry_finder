@@ -1,33 +1,26 @@
-import  mechanicalsoup
-from bs4 import BeautifulSoup
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.alert import Alert 
+import time
 
+driver = webdriver.Chrome()
+try: 
+    driver.get("https://www.latlong.net/convert-address-to-lat-long.html")
+    driver.find_element(By.CLASS_NAME, 'width70').send_keys("United States, 33647")
+    driver.find_element(By.XPATH, '//*[@title="Find lat long coordinates"]').click()
+    time.sleep(1)
+    while driver.find_element(By.ID, 'loading').is_displayed():
+        time.sleep(1)
+    latLong = driver.find_element(By.ID, 'latlngspan').get_attribute('innerHTML')
+    print(latLong)
+    # print(driver.page_source)
+except Exception:
+    print("Exception Occurs")
 
-browser = mechanicalsoup.StatefulBrowser()
-browser.open("https://www.latlong.net/convert-address-to-lat-long.html")
+driver.quit()
 
-# Assuming the input has an class attribute
-input_class = "width70"
+#in dom when loading
+#<span id="loading" style="display: block;">Looking for the lat long, please wait...</span>
 
-# Get the form
-form = browser.select_form()
-browser.form.print_summary()
-
-# browser["input"] = "1600 Amphitheatre Parkway, Mountain View, CA"
-browser.form.set_input({"class": input_class}, "1600 Amphitheatre Parkway, Mountain View, CA")
-# browser.form.print_summary()
-
-# # Get the BeautifulSoup representation of the form
-# soup_form = BeautifulSoup(str(form.form), 'html.parser')
-
-# # Find the input element
-# input_element = soup_form.find('input', {'class': input_class})
-
-# # Check if the input element was found
-# if input_element:
-#     # Set the value of the input element
-#     input_element['value'] = "1600 Amphitheatre Parkway, Mountain View, CA"
-#     print(input_element)
-#     # browser.launch_browser()
-#     browser.form.print_summary()
-# else:
-#     print(f"No input element with id '{input_class}' found")
+#in dom when loaded
+#<span id="loading" style="display: none;">Looking for the lat long, please wait...</span>
