@@ -2,7 +2,7 @@
 *By Cooper Lindsley and Jessica Twitmyer*
 
 ## Mission
-Our goal is to provide a tool to quickly locate food pantries and organize the information into a PDF. We want to make it easy for people to find the resources they need to feed themselves and their families.
+This tool quickly locates food pantries and organizes the information into a PDF. We want to make it easy for people to find the resources they need to feed themselves and their families.
 
 Currently, if a person needs assistance in finding food services, they must do so over the phone with 2-1-1 or through an established connection with a social worker. These methods are reliable sources of care, but are time-consuming for the user, and hunger can't wait. We seek to expedite the search process with an easy-to-use tool that anyone with an internet connection can access.
 
@@ -15,8 +15,8 @@ Our program utilizes web-scraping to collect and organize data from google maps.
 ![Schedule](images/schedule_prototype.png)
 
 ## Existing Features
-- Scrapes google maps for the first eight search results for a hard-coded location and search (food pantries in Lancaster, PA) (main.js -> pantries.csv)
-- Organizes scraped data into a list (list.js -> output.html)
+- Asks the user for a location and then scrapes google maps for the first eight search results in that area (main.js -> pantries.csv)
+- Organizes scraped data into a list (list.js -> list.html)
 - Organizes scraped data into a weekly schedule (schedule.js -> schedule.html)
 
 ## Upcoming Features
@@ -33,5 +33,5 @@ Our program utilizes web-scraping to collect and organize data from google maps.
   1. npm run scrape
 
 The files created by the program are located in:
-- output.html
+- list.html
 - schedule.html
