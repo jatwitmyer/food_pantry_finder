@@ -16,7 +16,7 @@ Our program utilizes web-scraping to collect and organize data from google maps.
 
 ## Existing Features
 - Asks the user for a location and then scrapes google maps for the first eight search results in that area (main.js -> pantries.csv)
-- Organizes scraped data into a list (list.js -> output.html)
+- Organizes scraped data into a list (list.js -> list.html)
 - Organizes scraped data into a weekly schedule (schedule.js -> schedule.html)
 
 ## Upcoming Features
@@ -33,5 +33,5 @@ Our program utilizes web-scraping to collect and organize data from google maps.
   1. npm run scrape
 
 The files created by the program are located in:
-- output.html
+- list.html
 - schedule.html
