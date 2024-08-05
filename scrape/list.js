@@ -88,6 +88,7 @@ fs.createReadStream('./pantries.csv')
     // Write the generated HTML content to an HTML file
     fs.writeFile('output.html', htmlContent, (err) => {
       if (err) throw err;
-      console.log('list.html has been saved!');
+      // console.log('list.html has been saved!');
+      console.log('\nYou can find a list of local food pantries in the scrape/output.html file.')
     });
   });

@@ -37,7 +37,7 @@ fs.createReadStream('./pantries.csv')
             //find the hours for that day and put it in the table if they're not closed
             const allHours = row.Hours
             if (row.Hours === "") {
-              console.log("No hours found for this pantry")
+              // console.log("No hours found for this pantry")
             }
             else {
 
@@ -137,7 +137,8 @@ fs.createReadStream('./pantries.csv')
 
         fs.writeFile('schedule.html', dom.serialize(), function(err){
             if (err) throw err;
-            console.log('schedule.html has been saved!');
+            // console.log('schedule.html has been saved!');
+            console.log('You can find a weekly schedule of local food pantries in the scrape/schedule.html file.')
         });
     });
   });

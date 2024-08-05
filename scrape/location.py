@@ -17,7 +17,7 @@ try:
     while driver.find_element(By.ID, 'loading').is_displayed():
         time.sleep(1)
     latLong = driver.find_element(By.ID, 'latlngspan').get_attribute('innerHTML')
-    print(latLong)
+    # print(latLong)
 
     # Write the latLong variable to a CSV file
     with open('scrape/latlong.csv', 'w', newline='') as file:

@@ -3,16 +3,17 @@
     "csv-parser": "^3.0.0",
     "fs": "^0.0.1-security",
     "jsdom": "^24.0.0",
+    "mocha": "*",
     "playwright": "^1.43.0",
-    "selenium-webdriver": "*",
-    "mocha": "*"
+    "prompt-sync": "^4.2.0",
+    "selenium-webdriver": "*"
   },
   "devDependencies": {
-      "mocha": "10.4.0"
+    "mocha": "10.4.0"
   },
   "scripts": {
     "location": "python scrape/location.py",
-    "scrape": "python scrape/location.py node scrape/main.js && node scrape/list.js && node scrape/schedule.js",
+    "scrape": "node scrape/main.js && node scrape/list.js && node scrape/schedule.js",
     "organize": "node scrape/list.js && node scrape/schedule.js",
     "test": "npx mocha test/**/*.spec.js --timeout 60000"
   }
