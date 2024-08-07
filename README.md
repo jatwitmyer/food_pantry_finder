@@ -15,7 +15,7 @@ Our program utilizes web-scraping to collect and organize data from google maps.
 ![Schedule](images/schedule_prototype.png)
 
 ## Existing Features
-- Asks the user for a location and then scrapes google maps for the first eight search results in that area (main.js -> pantries.csv)
+- Asks the user for a location and then scrapes google maps for the first eight search results in that area (scrape.js -> pantries.csv)
 - Organizes scraped data into a list (list.js -> list.html)
 - Organizes scraped data into a weekly schedule (schedule.js -> schedule.html)
 
