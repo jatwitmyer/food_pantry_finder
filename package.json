@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "dependencies": {
     "csv-parser": "^3.0.0",
     "fs": "^0.0.1-security",
@@ -6,15 +7,32 @@
     "mocha": "*",
     "playwright": "^1.43.0",
     "prompt-sync": "^4.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.0",
+    "react-scripts": "^5.0.1",
     "selenium-webdriver": "*"
   },
   "devDependencies": {
     "mocha": "10.4.0"
   },
   "scripts": {
+    "start": "react-scripts start",
     "location": "python scrape/location.py",
-    "scrape": "node scrape/main.js && node scrape/list.js && node scrape/schedule.js",
+    "scrape": "node scrape/scrape.js && node scrape/list.js && node scrape/schedule.js",
     "organize": "node scrape/list.js && node scrape/schedule.js",
     "test": "npx mocha test/**/*.spec.js --timeout 60000"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
