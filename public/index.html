@@ -15,7 +15,43 @@
 
     <title>Food Pantry Finder</title>
 <body>
-    <h1>Food Pantry Finder</h1>
-    <button id="scrape">Find pantries</button>
+  <!-- <div id="root"> -->
+    <h1 id="title">Food Pantry Finder</h1>
+
+    <div id="address-container">
+      <label for="address">Address:</label>
+      <!-- add information icon here -->
+      <input type="text" id="address" placeholder="Enter a full or partial address" />
+      <button id="search">Search</button>
+    </div>
+
+    <div id="search-results-container">
+      <div id="export-buttons">
+        <button id="download">Download</button>
+        <button id="print">Print</button>
+        <button id="share">Share</button>
+    </div>
+
+    <h2 id="search-results-title">Search Results</h2>
+
+    <div id="results-bar">
+      <!-- Javascript addition here: Showing results x of y -->
+      <button id="filters">Filters </button>
+      <!-- add filters icon here -->
+    </div>
+
+    <div id="pantries-container">
+      <!-- Javascript addition here: List of search results -->
+    </div>
+
+    <div id="loading-container">
+      <p>Loading</p>
+      <!-- add loading bar here -->
+    </div>
+
+    </div>
+  <!-- </div> -->
+    
+    
 </body>
 </html>
