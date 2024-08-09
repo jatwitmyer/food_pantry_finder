@@ -1,9 +1,73 @@
-#title {
-    background-color: gray;
-    width: fit-content;
+/* DESKTOP CSS */
+body {
+    display: grid;
+    gap: 10px;
 }
 
-#address-container {
-    background-color: gray;
-    width: fit-content;
+body > * {
+    margin: 0;
+    padding: 0;
+    height: fit-container;
+}
+
+/* header */
+.row-1 {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 10px;
+    height: fit-content;
+}
+
+.row-1 > * {
+    background-color: lightgray;
+    border: 1pt black solid;
+    height: fit-container;
+    margin: 0;
+    padding: 10px;
+}
+
+/* adress-container */
+.col-1b {
+    display: grid;
+    grid-template-columns: 4rem auto 4rem;
+    /* gap: 10px; */
+}
+
+.col-1b > * {
+    height: fit-content;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 10px;
+}
+
+/* search-results-container */
+.row-2 {
+    background-color: lightgray;
+    /* margin-top: 15px; */
+    display: grid;
+    gap: 10px;
+    height: fill-container;
+}
+
+.col-2a {
+    display: grid;
+    grid-template-columns: 200px auto 200px;
+    gap: 10px;
+}
+
+.col-2a > * {
+    border: 1pt black solid;
+    height: fit-container;
+    margin: 0;
+    padding: 10px;
+}
+
+.col-2b, .col-2c {
+    border: 1pt black solid;
+    margin: 0;
+    padding:10px;
+}
+
+.col-2c > * {
+    margin: 0;
 }

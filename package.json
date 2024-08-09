@@ -1,6 +1,7 @@
 {
   "type": "module",
   "dependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "csv-parser": "^3.0.0",
     "fs": "^0.0.1-security",
     "jsdom": "^24.0.0",

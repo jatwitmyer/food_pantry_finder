@@ -16,43 +16,54 @@
 
     <title>Food Pantry Finder</title>
 <body>
-  <!-- <div id="root"> -->
-    <h1 id="title">Food Pantry Finder</h1>
 
-    <div id="address-container">
-      <label for="address">Address:</label>
-      <!-- add information icon here -->
-      <input type="text" id="address" placeholder="Enter a full or partial address" />
-      <button id="search">Search</button>
+  <div class="row-1 header">
+
+    <h1 id="title" class="col-1a">Food Pantry Finder</h1>
+    
+    <div id="address-container" class="col-1b">
+      <div class="col-1bi">
+        <label for="address">Address</label>
+        <!-- add information icon here -->
+      </div>
+        
+      <input type="text" id="address" class="col-1bii" placeholder="Enter a full or partial address" />
+      <button id="search" class="1biii">Search</button>
     </div>
 
-    <div id="search-results-container">
-      <div id="export-buttons">
-        <button id="download">Download</button>
-        <button id="print">Print</button>
-        <button id="share">Share</button>
+  </div>
+
+  <div id="search-results-container" class="row-2">
+    
+    <div class="col-2a">
+
+      <div id="export-buttons" class="col-2ai">
+        <button id="download" class="col-2ai1">Download</button>
+        <button id="print" class="col-2ai2">Print</button>
+        <button id="share" class="col-2ai3">Share</button>
       </div>
 
-      <h2 id="search-results-title">Search Results</h2>
+      <h2 id="search-results-title" class="col-2aii">Search Results</h2>
 
-      <div id="results-bar">
+      <div id="results-bar" class="col-2aiii">
         <!-- Javascript addition here: Showing results x of y -->
         <button id="filters">Filters </button>
         <!-- add filters icon here -->
       </div>
 
-      <div id="pantries-container">
-        <!-- Javascript addition here: List of search results -->
-      </div>
-
-      <div id="loading-container">
-        <p>Loading</p>
-        <!-- add loading bar here -->
-      </div>
-
     </div>
-  <!-- </div> -->
+
+    <div id="pantries-container" class="col-2b">
+      <!-- Javascript addition here: List of search results -->
+      Pantry data
+    </div>
     
+    <div id="loading-container" class="col-2c footer">
+      <p class="col-2ci">Loading</p>
+      <!-- add loading bar here class="col-2cii" -->
+    </div>
+
+  </div>
     
 </body>
 </html>
