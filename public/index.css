@@ -1,21 +1,23 @@
 /* DESKTOP CSS */
 body {
-    display: grid;
-    gap: 10px;
+    margin: 0;
+    font: arial;
 }
 
-body > * {
+#root {
+    display: grid;
+    height: 100vh;
     margin: 0;
     padding: 0;
-    height: fit-container;
+    grid-template-rows: auto 1fr;
 }
 
 /* header */
 .row-1 {
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: auto 1fr;
     gap: 10px;
-    height: fit-content;
+    margin: 10px;
 }
 
 .row-1 > * {
@@ -26,48 +28,69 @@ body > * {
     padding: 10px;
 }
 
-/* adress-container */
-.col-1b {
+#address-container {
     display: grid;
-    grid-template-columns: 4rem auto 4rem;
-    /* gap: 10px; */
+    grid-template-columns: auto 1fr auto;
+    gap: 10px;
 }
 
-.col-1b > * {
-    height: fit-content;
+#address-container > * {
+    /* height: fit-content; */
     margin-top: auto;
     margin-bottom: auto;
-    padding: 10px;
 }
 
 /* search-results-container */
 .row-2 {
     background-color: lightgray;
-    /* margin-top: 15px; */
     display: grid;
     gap: 10px;
-    height: fill-container;
+    margin: 10px;
+    margin-top: 0;
+    padding: 10px;
+    grid-template-rows: auto 1fr auto;
 }
 
-.col-2a {
+.sub-header {
     display: grid;
     grid-template-columns: 200px auto 200px;
     gap: 10px;
 }
 
-.col-2a > * {
-    border: 1pt black solid;
-    height: fit-container;
+.sub-header > * {
     margin: 0;
-    padding: 10px;
+    justify-content: center;
 }
 
-.col-2b, .col-2c {
-    border: 1pt black solid;
-    margin: 0;
+#export-buttons {
+    display: flex;
+    justify-content: left; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+/* add subtle margins to corner features */
+#export-buttons > *, #filters-bar > *, #loading-container > * {
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#sub-title {
+    text-align: center;
+}
+
+#filters-bar {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+#pantries-container{
     padding:10px;
+    border: black 1pt solid;
 }
 
-.col-2c > * {
-    margin: 0;
+#loading-container {
+    height: fit-content;
 }
