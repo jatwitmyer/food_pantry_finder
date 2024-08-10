@@ -1,7 +1,24 @@
+/* MANGO THEME COLORS */
+:root {
+    --Piper: #D55025;
+    --MangoTango: #E37B02;
+    --Tangerine: #E49B00;
+    --Tanglow: #F5B824;
+    --Sunglow: #FDC636;
+    --SunglowLight: #f9cb56;
+    --SunglowVeryLight: #f6d582;
+    --GoldenGrass: #D7BD1E;
+    --Sycamore: #9C973C;
+    --SycamoreDark: #7D7A2E;
+    --SycamoreVeryDark: #4b4814;
+    --WarmWhite: #efebd8;
+}
+
 /* DESKTOP CSS */
 body {
     margin: 0;
     font: arial;
+    background-color: var(--WarmWhite);
 }
 
 #root {
@@ -21,9 +38,10 @@ body {
 }
 
 .row-1 > * {
-    background-color: lightgray;
-    border: 1pt black solid;
-    height: fit-container;
+    background-color: var(--SunglowVeryLight);
+    box-shadow: 0 0 40px var(--Sunglow) inset;
+    border-radius: 10px;
+    /* border-radius: inner 10px; */
     margin: 0;
     padding: 10px;
 }
@@ -35,18 +53,36 @@ body {
 }
 
 #address-container > * {
-    /* height: fit-content; */
     margin-top: auto;
     margin-bottom: auto;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;;
+}
+
+input {
+    background-color: var(--WarmWhite);
+    font: inherit
+}
+
+input[type="submit"] {
+    cursor: pointer;
 }
 
 /* search-results-container */
 .row-2 {
-    background-color: lightgray;
+    background-color: var(--SunglowVeryLight);
+    box-shadow:
+        0 0 200px var(--Sunglow) inset,
+        0 0 0 8px var(--Tangerine),
+        0 0 0 13px var(--MangoTango);
+        /* 0 0 0 15px var(--Piper); */
+    margin: 23px;
+    margin-top: 13px;
+    border-radius: 10px;
     display: grid;
     gap: 10px;
-    margin: 10px;
-    margin-top: 0;
+
     padding: 10px;
     grid-template-rows: auto 1fr auto;
 }
@@ -70,14 +106,16 @@ body {
 
 /* add subtle margins to corner features */
 #export-buttons > *, #filters-bar > *, #loading-container > * {
-    margin-left: 2px;
-    margin-right: 2px;
-    margin-top: 0;
-    margin-bottom: 0;
+    margin:0;
+}
+
+#title, #sub-title {
+    color: Black;
 }
 
 #sub-title {
     text-align: center;
+    margin: auto;
 }
 
 #filters-bar {
@@ -86,11 +124,68 @@ body {
     align-items: center;
 }
 
+#filters-bar > * {
+    padding: 6px 10px;
+}
+
+select {
+    background-color: var(--WarmWhite);
+    border: none;
+    border-radius: 5px;
+    font: inherit;
+}
+
+#filters-bar > *:hover {
+    cursor: pointer;
+}
+
 #pantries-container{
     padding:10px;
-    border: black 1pt solid;
+    background-color: var(--WarmWhite);
+    border-radius: 10px;
 }
 
 #loading-container {
+    display: grid;
+    gap: 10px;  
+    grid-template-columns: auto 1fr auto;
     height: fit-content;
+    background-color: var(--WarmWhite);
+    border-radius: 10px;
+    padding: 10px;
 }
+
+#loading-container > p {
+    margin: auto;
+}
+
+#progress {
+    background: var(--WarmWhite);
+    border: var(--MangoTango) 2px solid;
+    border-radius: 13px;
+    height: 20px;
+    width: 100%;
+    margin: auto;
+}
+
+#progress:after {
+    background: var(--Tangerine);
+    border: var(--Tangerine) 2px solid inset;
+    content: '';
+    display: block;
+    width: 50%;
+    height: 100%;
+    border-radius: 9px;
+}
+
+button{ 
+    all: unset;
+    cursor: pointer;
+    padding: 6px 10px;
+}
+
+button:hover {
+    text-decoration: underline 0.8pt;
+    text-underline-offset: 1.5px;
+}
+
