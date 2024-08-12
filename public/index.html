@@ -19,35 +19,43 @@
 
   <div id="root">
 
-    <div class="row-1 header">
-
-      <h1 id="title" class="col-1a">Food Pantry Finder</h1>
-      
-      <div id="address-container" class="col-1b">
-        <div class="col-1bi">
-          <label for="address">Address</label>
-          <!-- add information icon here -->
-        </div>
-          
-        <input type="text" id="address" class="col-1bii" placeholder="Enter a full or partial address" />
-        <input type="submit" id="search" class="1biii" value="Search"></input>
+    <div id="nav-bar" class="sycamore" >
+      <h1 id="title">Food Pantry Finder</h1>
+      <div id="nav-buttons">
+        <button id="find-food">Find Food</button>
+        <button id="about">About</button>
+        <button id="contact">Contact</button>
+        <button id="more-resources">More Resources</button>
       </div>
-
+    </div>
+    
+    <div id="top-gradient">
+      <div class="sycamore-dark" ></div>
+      <div class="piper" ></div>
+      <div class="mango-tango" ></div>
+      <div class="tanglow" ></div>
     </div>
 
-    <div class="row-2 content">
-      
-      <div class="col-2a sub-header">
+    <div class="content">
+      <div id="address-container" class="row-1">
+          <h2>Address</h2>
+          <!-- <label for="address">Address</label> -->
+          <input type="text" id="address" placeholder="Enter your full or partial address" />
+          <input type="submit" id="search" value="Search"></input>
+      </div>
 
-        <div id="export-buttons" class="col-2ai">
-          <button id="download" class="col-2ai1">Download</button>
-          <button id="print" class="col-2ai2">Print</button>
-          <button id="share" class="col-2ai3">Share</button>
+      <div class="row-2 sub-header">
+
+        <h3 id="sub-title">Search Results</h3>
+
+        <div id="export-buttons" >
+          <button id="download">Download</button>
+          <button id="print">Print</button>
+          <button id="share">Share</button>
+          <button id="edit">Edit</button>
         </div>
 
-        <h3 id="sub-title" class="col-2aii">Search Results</h3>
-
-        <div id="filters-bar" class="col-2aiii">
+        <div id="filters-bar">
           <!-- Javascript addition here: Showing results x of y -->
           <!-- <button id="filters">Filters </button> -->
           <label for="distance">Distance</label>
@@ -60,21 +68,26 @@
           </select>
           <!-- add filters icon here -->
         </div>
-
       </div>
 
-      <div id="pantries-container" class="col-2b">
+      <div id="pantries-container" class="row-3">
         <!-- Javascript addition here: List of search results -->
         Pantry data
       </div>
       
-      <div id="loading-container" class="col-2c footer">
-        <p class="col-2ci">Loading Results</p>
+      <div id="loading-container" class="row-4">
+        <p>Finding Results</p>
         <div id="progress"></div>
         <!-- add loading bar here class="col-2cii" -->
-        <p class="col-2ciii">Showing 0 of 9</p>
+        <p>Showing 0 of 9</p>
       </div>
 
+    </div>
+
+    <div id="bottom-gradient">
+      <div class="tanglow" ></div>
+      <div class="mango-tango" ></div>
+      <div class="piper" ></div>
     </div>
 
   </div>

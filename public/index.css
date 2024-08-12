@@ -11,14 +11,15 @@
     --Sycamore: #9C973C;
     --SycamoreDark: #7D7A2E;
     --SycamoreVeryDark: #4b4814;
+    --SycamoreLight: #B4B17A;
     --WarmWhite: #efebd8;
 }
 
 /* DESKTOP CSS */
 body {
     margin: 0;
-    font: arial;
-    background-color: var(--WarmWhite);
+    font-family: 'Verdana', 'Arial', 'Helvetica', 'sans-serif';
+    background-color: var(--SunglowVeryLight);
 }
 
 #root {
@@ -26,76 +27,90 @@ body {
     height: 100vh;
     margin: 0;
     padding: 0;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto auto 1fr auto;
 }
 
-/* header */
-.row-1 {
+/* nav bar */
+#nav-bar {
     display: grid;
-    grid-template-columns: auto 1fr;
+    /* grid-template-columns: 1fr 1fr; */
     gap: 10px;
-    margin: 10px;
+    background-color: var(--Sycamore);
+    padding: 20px;
+    padding-top: 25px;
+    height: fit-content;
 }
 
-.row-1 > * {
-    background-color: var(--SunglowVeryLight);
-    box-shadow: 0 0 40px var(--Sunglow) inset;
+#nav-bar > * {
+    background-color: var(--Sycamore);
     border-radius: 10px;
-    /* border-radius: inner 10px; */
-    margin: 0;
-    padding: 10px;
+    margin: auto;
 }
 
+/* gradients */
+#top-gradient > *, #bottom-gradient > * {
+    height: 7px;
+}
+.sycamore-dark {
+    background-color: var(--SycamoreDark);
+}
+.piper {
+    background-color: var(--Piper);
+}
+.mango-tango {
+    background-color: var(--MangoTango);
+}
+.tanglow {
+    background-color: var(--Tanglow);
+}
+
+/* content body */
+.content {
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    gap: 10px;
+    padding: 10px;
+    /* background-color: var(--SunglowVeryLight); */
+    margin: 16px 10px;
+}
+
+
+/* address container */
 #address-container {
     display: grid;
     grid-template-columns: auto 1fr auto;
-    gap: 10px;
+    gap: 15px;
 }
 
 #address-container > * {
     margin-top: auto;
     margin-bottom: auto;
     border: none;
-    padding: 5px;
+    /* padding: 5px; */
     border-radius: 5px;;
 }
 
 input {
     background-color: var(--WarmWhite);
-    font: inherit
+    font: inherit;
+    padding: 6px;
 }
 
 input[type="submit"] {
     cursor: pointer;
 }
 
-/* search-results-container */
+::placeholder {
+    color: rgb(98, 98, 98);
+}
+
+/* sub-header */
 .row-2 {
-    background-color: var(--SunglowVeryLight);
-    box-shadow:
-        0 0 200px var(--Sunglow) inset,
-        0 0 0 8px var(--Tangerine),
-        0 0 0 13px var(--MangoTango);
-        /* 0 0 0 15px var(--Piper); */
-    margin: 23px;
-    margin-top: 13px;
-    border-radius: 10px;
     display: grid;
-    gap: 10px;
-
-    padding: 10px;
-    grid-template-rows: auto 1fr auto;
-}
-
-.sub-header {
-    display: grid;
-    grid-template-columns: 200px auto 200px;
-    gap: 10px;
-}
-
-.sub-header > * {
-    margin: 0;
-    justify-content: center;
+    gap: 20px;
+    grid-template-columns: auto 1fr auto;
+    margin-top: 15px;
+    margin-bottom: 0px;
 }
 
 #export-buttons {
@@ -107,10 +122,6 @@ input[type="submit"] {
 /* add subtle margins to corner features */
 #export-buttons > *, #filters-bar > *, #loading-container > * {
     margin:0;
-}
-
-#title, #sub-title {
-    color: Black;
 }
 
 #sub-title {
@@ -139,12 +150,15 @@ select {
     cursor: pointer;
 }
 
+/* row 3 */
 #pantries-container{
     padding:10px;
+    margin-top: 0px;
     background-color: var(--WarmWhite);
     border-radius: 10px;
 }
 
+/* row 4 */
 #loading-container {
     display: grid;
     gap: 10px;  
@@ -153,6 +167,7 @@ select {
     background-color: var(--WarmWhite);
     border-radius: 10px;
     padding: 10px;
+    margin-top: 15px;
 }
 
 #loading-container > p {
@@ -161,7 +176,7 @@ select {
 
 #progress {
     background: var(--WarmWhite);
-    border: var(--MangoTango) 2px solid;
+    border: var(--SycamoreDark) 2px solid;
     border-radius: 13px;
     height: 20px;
     width: 100%;
@@ -169,8 +184,8 @@ select {
 }
 
 #progress:after {
-    background: var(--Tangerine);
-    border: var(--Tangerine) 2px solid inset;
+    background: var(--Sycamore);
+    border: var(--Sycamore) 2px solid inset;
     content: '';
     display: block;
     width: 50%;
@@ -178,6 +193,7 @@ select {
     border-radius: 9px;
 }
 
+/* all buttons */
 button{ 
     all: unset;
     cursor: pointer;
