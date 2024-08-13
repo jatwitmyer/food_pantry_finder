@@ -45,6 +45,7 @@ body {
     background-color: var(--Sycamore);
     border-radius: 10px;
     margin: auto;
+    font-weight: bold;
 }
 
 /* gradients */
@@ -151,11 +152,71 @@ select {
 }
 
 /* row 3 */
-#pantries-container{
+#pantry-content{
     padding:10px;
     margin-top: 0px;
     background-color: var(--WarmWhite);
     border-radius: 10px;
+}
+
+/* table background */
+#pantry-chart{
+    position:relative;
+    height: 100%;
+    width: 100%;
+}
+
+#pantry-chart > table {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-height: 100%;
+    border: 1px black solid;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px black solid;
+    border-top: none;
+    border-bottom: none;
+    border-collapse: collapse;
+    padding: 5px;
+}
+
+th {
+    vertical-align: top;
+    height: 20px;
+}
+
+td {
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+}
+
+td > * {
+    background-color: var(--SunglowLight);
+    padding: 5px;
+    text-align: center;
+}
+
+.pantry-card {
+    width: fit-content;
+    margin: 10px auto;
+    padding: 20px 10%;
+}
+
+div[class*="monday"] {
+    margin-left: 15%;
+}
+
+div[class*="sunday"] {
+    margin-right: 10px;
+}
+
+.pantry-card > * {
+    margin: 0;
 }
 
 /* row 4 */
@@ -204,4 +265,3 @@ button:hover {
     text-decoration: underline 0.8pt;
     text-underline-offset: 1.5px;
 }
-
