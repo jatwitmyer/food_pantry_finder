@@ -20,52 +20,135 @@
 
   <div id="root">
 
-    <div class="row-1 header">
+    <div id="nav-bar" class="sycamore" >
+      <h1 id="title">Food Pantry Finder</h1>
+      <div id="nav-buttons">
+        <button id="find-food">Find Food</button>
+        <button id="about">About</button>
+        <button id="contact">Contact</button>
+        <button id="more-resources">More Resources</button>
+      </div>
+    </div>
+    
+    <div id="top-gradient">
+      <div class="sycamore-dark" ></div>
+      <div class="piper" ></div>
+      <div class="mango-tango" ></div>
+      <div class="tanglow" ></div>
+    </div>
 
-      <h1 id="title" class="col-1a">Food Pantry Finder</h1>
-      
-      <div id="address-container" class="col-1b">
-        <div class="col-1bi">
-          <label for="address">Address</label>
-          <!-- add information icon here -->
+    <div class="content">
+      <div id="address-container" class="row-1">
+          <h2>Address</h2>
+          <!-- <label for="address">Address</label> -->
+          <input type="text" id="address" placeholder="Enter your full or partial address" />
+          <input type="submit" id="search" value="Search"></input>
+      </div>
+
+      <div class="row-2 sub-header">
+
+        <h3 id="sub-title">Search Results</h3>
+
+        <div id="export-buttons" >
+          <button id="download">Download</button>
+          <button id="print">Print</button>
+          <button id="share">Share</button>
+          <button id="edit">Edit</button>
         </div>
-          
-        <input type="text" id="address" class="col-1bii" placeholder="Enter a full or partial address" />
-        <button id="search" class="1biii">Search</button>
+
+        <div id="filters-bar">
+          <!-- Javascript addition here: Showing results x of y -->
+          <!-- <button id="filters">Filters </button> -->
+          <label for="distance">Distance</label>
+          <select id="distance" name="distance">
+            <option value="5">5 miles</option>
+            <option value="10">10 miles</option>
+            <option value="15">15 miles</option>
+            <option value="20">20 miles</option>
+            <option value="25">25 miles</option>
+          </select>
+          <!-- add filters icon here -->
+        </div>
+      </div>
+
+      <div id="pantry-content" class="row-3">
+        <div id="chart-container">
+          <table>
+            <tr>
+              <th style="width:30%" class="card">Pantries</th>
+              <th style="width:10%" class="monday">Mon</th>
+              <th style="width:10%" class="tuesday">Tue</th>
+              <th style="width:10%" class="wednesday">Wed</th>
+              <th style="width:10%" class="thursday">Thur</th>
+              <th style="width:10%" class="friday">Fri</th>
+              <th style="width:10%" class="saturday">Sat</th>
+              <th style="width:10%" class="sunday">Sun</th>
+            </tr>
+          </table>
+          <div id="pantry-data">
+            <div class="pantry-row">
+              <div class="pantry-card">
+                <p>Food Pantry Name</p>
+                <p>Address</p>
+                <p>Phone Number</p>
+                <p>Website</p>
+              </div>
+              <div class="hours monday"> 9am - 5pm</div>
+              <div class="hours tuesday"> 9am - 5pm</div>
+              <div class="hours wednesday"> 9am - 5pm</div>
+              <div class="hours thursday"> 9am - 5pm</div>
+              <div class="hours friday"> 9am - 5pm</div>
+              <div class="hours saturday"> 9am - 5pm</div>
+              <div class="hours sunday"> 9am - 5pm</div>
+            </div>
+            <div class="pantry-row">
+              <div class="pantry-card">
+                <p>Food Pantry Name</p>
+                <p>Address</p>
+                <p>Phone Number</p>
+                <p>Website</p>
+              </div>
+              <div class="hours monday"> 9am - 5pm</div>
+              <div class="hours tuesday"> 9am - 5pm</div>
+              <div class="hours wednesday"> 9am - 5pm</div>
+              <div class="hours thursday"> 9am - 5pm</div>
+              <div class="hours friday"> 9am - 5pm</div>
+              <div class="hours saturday"> 9am - 5pm</div>
+              <div class="hours sunday"> 9am - 5pm</div>
+            </div>
+            <div class="pantry-row">
+              <div class="pantry-card">
+                <p>Food Pantry Name</p>
+                <p>Address</p>
+                <p>Phone Number</p>
+                <p>Website</p>
+              </div>
+              <div class="hours monday"> 9am - 5pm</div>
+              <div class="hours tuesday"> 9am - 5pm</div>
+              <div class="hours wednesday"> 9am - 5pm</div>
+              <div class="hours thursday"> 9am - 5pm</div>
+              <div class="hours friday"> 9am - 5pm</div>
+              <div class="hours saturday"> 9am - 5pm</div>
+              <div class="hours sunday"> 9am - 5pm</div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      
+      <div id="loading-container" class="row-4">
+        <p>Finding Results</p>
+        <div id="progress"></div>
+        <!-- add loading bar here class="col-2cii" -->
+        <p>Showing 0 of 9</p>
       </div>
 
     </div>
 
-    <div class="row-2 content">
-      
-      <div class="col-2a sub-header">
-
-        <div id="export-buttons" class="col-2ai">
-          <button id="download" class="col-2ai1">Download</button>
-          <button id="print" class="col-2ai2">Print</button>
-          <button id="share" class="col-2ai3">Share</button>
-        </div>
-
-        <h3 id="sub-title" class="col-2aii">Search Results</h3>
-
-        <div id="filters-bar" class="col-2aiii">
-          <!-- Javascript addition here: Showing results x of y -->
-          <button id="filters">Filters </button>
-          <!-- add filters icon here -->
-        </div>
-
-      </div>
-
-      <div id="pantries-container" class="col-2b">
-        <!-- Javascript addition here: List of search results -->
-        Pantry data
-      </div>
-      
-      <div id="loading-container" class="col-2c footer">
-        <p class="col-2ci">Loading</p>
-        <!-- add loading bar here class="col-2cii" -->
-      </div>
-
+    <div id="bottom-gradient" class="row-5">
+      <div class="tanglow" ></div>
+      <div class="mango-tango" ></div>
+      <div class="piper" ></div>
     </div>
 
   </div>
