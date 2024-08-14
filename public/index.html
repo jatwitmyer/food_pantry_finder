@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <meta charset="utf-8" />
     <!-- <link rel="icon" href="%PUBLIC_URL%/favicon.ico" /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -15,6 +16,7 @@
     <!-- <link rel="manifest" href="%PUBLIC_URL%/manifest.json" /> -->
 
     <title>Food Pantry Finder</title>
+</head>
 <body>
 
   <div id="root">
@@ -39,7 +41,16 @@
     <div class="content">
       <div id="address-container" class="row-1">
           <h2>Address</h2>
-          <!-- <label for="address">Address</label> -->
+          <div class="tooltip">
+            <i class="material-icons">&#xe88f;</i>
+            <span class="tooltip-text">You can search for local food pantries by inputing one of the following:
+              <ul>
+                  <li>City, State (e.g. Wilmington, NC)</li>
+                  <li>Zip code (e.g. 14602)</li>
+                  <li>Nearby intersection (e.g. 3rd and Broadway)</li>
+              </ul>
+            </span>
+          </div>
           <input type="text" id="address" placeholder="Enter your full or partial address" />
           <input type="submit" id="search" value="Search"></input>
       </div>
