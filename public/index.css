@@ -205,7 +205,7 @@ th {
     height: calc(100% - 37px);
     /* min height is 200-37px */
     min-height: 163px; 
-    overflow: auto;w
+    overflow: auto;
 }
 
 .pantry-row {
