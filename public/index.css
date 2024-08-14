@@ -152,7 +152,7 @@ select {
 }
 
 /* row 3 */
-#pantry-content{
+#pantry-content {
     padding:10px;
     margin-top: 0px;
     background-color: var(--WarmWhite);
@@ -160,7 +160,7 @@ select {
 }
 
 /* table background */
-#pantry-chart{
+#pantry-chart {
     position:relative;
     height: 100%;
     width: 100%;
@@ -255,7 +255,7 @@ div[class*="sunday"] {
 }
 
 /* all buttons */
-button{ 
+button { 
     all: unset;
     cursor: pointer;
     padding: 6px 10px;
@@ -278,7 +278,7 @@ button:hover {
         margin-bottom: 16px;
     }
     
-    #bottom-gradient{
+    #bottom-gradient {
         position: fixed;
         bottom: 0;
         left: 0;
