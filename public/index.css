@@ -77,7 +77,7 @@ body {
 /* address container */
 #address-container {
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto auto 1fr auto;
     gap: 15px;
 }
 
@@ -85,8 +85,60 @@ body {
     margin-top: auto;
     margin-bottom: auto;
     border: none;
-    /* padding: 5px; */
     border-radius: 5px;
+}
+
+/* tooltip */
+.material-icons {
+    color: #D55025;
+}
+
+.material-icons:hover {
+    cursor: help;
+    color: #4b4814;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    margin-left: -13px;
+}
+
+.tooltip-text {
+    font-size: 12px;
+}
+
+.tooltip .tooltip-text {
+    position: absolute;
+    visibility: hidden;
+    width: 350px;
+    background-color: black;
+    color: #fff;
+    text-align: left;
+    border-radius: 6px;
+    padding: 5px 5px 0 5px;
+    z-index: 100;
+    top: 110%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.tooltip .tooltip-text::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 16.5%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
+  }
+  
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
 }
 
 input {

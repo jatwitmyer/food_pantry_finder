@@ -7,7 +7,16 @@ function FindFood() {
   <>
     <div id="address-container" className="row-1">
       <h2>Address</h2>
-      {/* <label for="address">Address</label> */}
+      <div class="tooltip">
+        <i class="material-icons">&#xe88f;</i>
+        <span class="tooltip-text">You can search for local food pantries by inputing one of the following:
+          <ul>
+            <li>City, State (e.g. Wilmington, NC)</li>
+            <li>Zip code (e.g. 14602)</li>
+            <li>Nearby intersection (e.g. 3rd and Broadway)</li>
+          </ul>
+        </span>
+      </div>
       <input
         type="text"
         id="address"
