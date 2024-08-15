@@ -48,6 +48,17 @@ body {
     font-weight: bold;
 }
 
+#nav-buttons > * {
+    padding: 6px 10px;
+    text-decoration: none;
+    color: black;
+}
+
+#nav-buttons > *:hover {
+    text-decoration: underline 0.8pt;
+    text-underline-offset: 1.5px;
+}
+
 /* gradients */
 #top-gradient > *, #bottom-gradient > * {
     height: 7px;
@@ -66,7 +77,7 @@ body {
 }
 
 /* content body */
-.content {
+#food-content {
     display: grid;
     grid-template-rows: auto auto 1fr auto;
     gap: 10px;
@@ -266,7 +277,7 @@ th {
 }
 
 /* all buttons */
-button{ 
+button { 
     all: unset;
     cursor: pointer;
     padding: 6px 10px;

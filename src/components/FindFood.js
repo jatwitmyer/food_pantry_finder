@@ -4,7 +4,7 @@ import LoadingAnimation from "./LoadingAnimation.js";
 
 function FindFood() {
   return(
-  <>
+  <div id="food-content">
     <div id="address-container" className="row-1">
       <h2>Address</h2>
       {/* <label for="address">Address</label> */}
@@ -77,7 +77,7 @@ function FindFood() {
       </div>
     </div>
     <LoadingAnimation />
-  </>
+  </div>
   )
 }
 
