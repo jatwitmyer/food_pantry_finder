@@ -202,7 +202,7 @@ select {
 }
 
 /* row 3 */
-#pantry-content{
+#pantry-content {
     padding:10px;
     margin-top: 0px;
     background-color: var(--WarmWhite);
@@ -212,7 +212,7 @@ select {
 }
 
 /* table background */
-#chart-container{
+#chart-container {
     position:relative;
     height: 100%;
     width: 100%;
@@ -223,7 +223,7 @@ select {
 }
 
 /* table background */
-#chart-container{
+#chart-container {
     position:relative;
     height: 100%;
     width: 100%;
@@ -318,7 +318,7 @@ th {
 }
 
 /* all buttons */
-button{ 
+button { 
     all: unset;
     cursor: pointer;
     padding: 6px 10px;
