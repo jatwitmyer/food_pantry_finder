@@ -1,11 +1,39 @@
 import React from "react";
 import PantryRow from "./PantryRow.js";
 import LoadingAnimation from "./LoadingAnimation.js";
+// import scrape from "scrape.js";
 
 function FindFood() {
+
+  async function handleSearch(e) {
+    e.preventDefault();
+    console.log("Submit button clicked");
+    const address = e.target.address.value;
+    // scrape(address)
+    try {
+      const response = await fetch('http://localhost:8000/scrape', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ address }),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Number of pantries:', data.numPantries);
+      } else {
+        console.error('Error occurred during scraping');
+      }
+    } catch (error) {
+      console.error('Error occurred during scraping', error);
+    }
+  }
+
+
+
   return(
   <div id="food-content">
-    <div id="address-container" className="row-1">
+    <form onSubmit={handleSearch} id="address-container" className="row-1">
       <h2>Address</h2>
       {/* <label for="address">Address</label> */}
       <input
@@ -14,7 +42,7 @@ function FindFood() {
         placeholder="Enter your full or partial address"
       />
       <input type="submit" id="search" defaultValue="Search" />
-    </div>
+    </form>
     <div className="row-2 sub-header">
       <h3 id="sub-title">Search Results</h3>
       <div id="export-buttons">
