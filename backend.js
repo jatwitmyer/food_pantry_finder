@@ -15,7 +15,8 @@ app.post('/scrape', async (req, res) => {
   const { address } = req.body;
   try {
     const numPantries = await scrape(address);
-    res.status(200).json({ numPantries }); // Send response as JSON
+    const pantriesArray = []
+    res.status(200).json({ numPantries, pantriesArray }); // Send response as JSON
   } catch (error) {
     res.status(500).send('Error occurred during scraping');
   }

@@ -20,6 +20,7 @@ function FindFood() {
       });
       if (response.ok) {
         const data = await response.json();
+        console.log(data)
         console.log('Number of pantries:', data.numPantries);
       } else {
         console.error('Error occurred during scraping');

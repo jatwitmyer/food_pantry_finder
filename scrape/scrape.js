@@ -41,8 +41,11 @@ async function scrape(address) {
   }
 
   //FIND ALL PANTRIES (URLS) FROM THE SEARCH
-  const urlsLocator = page.locator('a');
-  const urls = await urlsLocator.evaluateAll(links => links.map(link => link.href).filter(href => href.startsWith('https://www.google.com/maps/place/')));
+  // async function getUrls() {
+    const urlsLocator = page.locator('a');
+    const urls = await urlsLocator.evaluateAll(links => links.map(link => link.href).filter(href => href.startsWith('https://www.google.com/maps/place/')));
+    // return urls;
+  // }
   const numPantries = urls.length
   console.log(numPantries)
   
