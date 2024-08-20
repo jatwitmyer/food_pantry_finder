@@ -221,7 +221,7 @@ th {
 
 .pantry-row {
     display: grid;
-    grid-template-columns: 3fr repeat(7, 1fr);
+    grid-template-columns: 30% repeat(7, 10%);
 }
 
 .pantry-row > * {
@@ -230,11 +230,16 @@ th {
     padding: 5px;
     text-align: center;
     height: fit-content;
+    overflow: auto;
 }
 
 .pantry-row > div[class*="hours"] {
     margin-top: auto;
     margin-bottom: auto;
+}
+
+.pantry-name {
+    font-weight: bold;
 }
 
 .pantry-card > * {

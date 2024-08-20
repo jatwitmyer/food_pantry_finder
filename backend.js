@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const scrape = require('./scrape/scrape.js'); // Import the scrape function
+const {getPantryUrls, scrapePantryDetails} = require('./scrape/scrape.js'); // Import the getPantryUrls function
 const app = express();
 const port = 8000;
 
@@ -11,16 +11,27 @@ app.use(cors({
 }));
 app.use(express.json());
 
-app.post('/scrape', async (req, res) => {
+app.post('/urls', async (req, res) => {
   const { address } = req.body;
   try {
-    const numPantries = await scrape(address);
-    const pantriesArray = []
-    res.status(200).json({ numPantries, pantriesArray }); // Send response as JSON
+    const urls = await getPantryUrls(address);
+    // console.log(urls)
+    res.status(200).json(urls); // Send response as JSON
   } catch (error) {
     res.status(500).send('Error occurred during scraping');
   }
 });
+
+app.post('/scrape', async (req, res) => {
+  const { url } = req.body;
+  try {
+    const pantryDetails = await scrapePantryDetails(url);
+    // console.log(pantryDetails)
+    res.status(200).json(pantryDetails); // Send response as JSON
+  } catch (error) {
+    res.status(500).send('Error occurred during scraping');
+  }
+})
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

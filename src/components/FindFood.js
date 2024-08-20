@@ -1,17 +1,63 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PantryRow from "./PantryRow.js";
 import LoadingAnimation from "./LoadingAnimation.js";
 // import scrape from "scrape.js";
 
 function FindFood() {
+  const [urls, setUrls] = useState(() => {
+    const savedUrls = localStorage.getItem("urls");
+    return savedUrls ? JSON.parse(savedUrls) : [];
+  });
+  console.log(urls.length)
+
+  const [allPantries, setAllPantries] = useState(() => {
+    const savedPantries = localStorage.getItem("allPantries");
+    return savedPantries ? JSON.parse(savedPantries) : [];
+  });
+
+  const [pantryRows, setPantryRows] = useState([]);
+  // console.log(allPantries)
+
+  useEffect(() => {
+    console.log("Component mounted");
+  }, []);
+
+  useEffect(() => {
+    const rows = allPantries.map((pantry, index) => (
+      <PantryRow key={index} pantryDetails={pantry} />
+    ));
+    setPantryRows(rows);
+  }, [allPantries]);
+
+  useEffect(() => {
+    localStorage.setItem("urls", JSON.stringify(urls));
+  }, [urls]);
+
+  useEffect(() => {
+    localStorage.setItem("allPantries", JSON.stringify(allPantries));
+  }, [allPantries]);
+
+  //conditionally add padding to the sunday column when height of children exceeds 163px
+  const sunday = document.getElementById("sunday-column");
+  const pantryData = document.getElementById("pantry-data");
+  if (pantryData.clientHeight > 163) {
+    // sunday.style.outline = "red 1px solid";
+    sunday.style.paddingRight = "40px";
+  }
+
 
   async function handleSearch(e) {
     e.preventDefault();
+    setUrls([])
+    setAllPantries([])
     console.log("Submit button clicked");
     const address = e.target.address.value;
-    // scrape(address)
+    requestPantryUrls(address);
+  }
+
+  async function requestPantryUrls(address) {
     try {
-      const response = await fetch('http://localhost:8000/scrape', {
+      const response = await fetch('http://localhost:8000/urls', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -19,9 +65,11 @@ function FindFood() {
         body: JSON.stringify({ address }),
       });
       if (response.ok) {
-        const data = await response.json();
-        console.log(data)
-        console.log('Number of pantries:', data.numPantries);
+        const urls = await response.json();
+        // console.log(urls)
+        setUrls(urls);
+        localStorage.setItem("urls", JSON.stringify(urls));
+        urls.forEach(url => requestPantryDetails(url));
       } else {
         console.error('Error occurred during scraping');
       }
@@ -31,6 +79,26 @@ function FindFood() {
   }
 
 
+  async function requestPantryDetails(url) {
+    try {
+      const response = await fetch('http://localhost:8000/scrape', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ url }),
+      });
+      if (response.ok) {
+        const pantryDetails = await response.json();
+        setAllPantries(prevPantries => [...prevPantries, pantryDetails]);
+        // localStorage.setItem("allPantries", JSON.stringify(allPantries));
+        // console.log(pantryDetails) //object with pantry details
+      } else {
+        console.error('Error occurred during scraping');
+      }
+    } catch (error) {
+      console.error('Error occurred during scraping', error);
+  }}
 
   return(
   <div id="food-content">
@@ -71,41 +139,24 @@ function FindFood() {
         <table>
           <tbody>
             <tr>
-              <th style={{ width: "30%" }} className="card">
-                Pantries
-              </th>
-              <th style={{ width: "10%" }} className="monday">
-                Mon
-              </th>
-              <th style={{ width: "10%" }} className="tuesday">
-                Tue
-              </th>
-              <th style={{ width: "10%" }} className="wednesday">
-                Wed
-              </th>
-              <th style={{ width: "10%" }} className="thursday">
-                Thur
-              </th>
-              <th style={{ width: "10%" }} className="friday">
-                Fri
-              </th>
-              <th style={{ width: "10%" }} className="saturday">
-                Sat
-              </th>
-              <th style={{ width: "10%" }} className="sunday">
-                Sun
-              </th>
+              <th style={{ width: "30%" }} >Pantries</th>
+              <th style={{ width: "10%" }} >Mon</th>
+              <th style={{ width: "10%" }} >Tue</th>
+              <th style={{ width: "10%" }} >Wed</th>
+              <th style={{ width: "10%" }} >Thur</th>
+              <th style={{ width: "10%" }} >Fri</th>
+              <th style={{ width: "10%" }} >Sat</th>
+              <th style={{ width: "10%" }} id="sunday-column">Sun</th>
             </tr>
           </tbody>
         </table>
         <div id="pantry-data">
-          <PantryRow />
-          <PantryRow />
-          <PantryRow />
+          {/* <PantryRow />*/}
+          {pantryRows}
         </div>
       </div>
     </div>
-    <LoadingAnimation />
+    {/* <LoadingAnimation /> */}
   </div>
   )
 }
