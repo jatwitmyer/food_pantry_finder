@@ -26,7 +26,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/resources" element={<MoreResources />} />
       </Routes>
-      <div id="bottom-gradient" className="row-5">
+      <div id="bottom-gradient">
         <div className="tanglow" />
         <div className="mango-tango" />
         <div className="piper" />

@@ -4,101 +4,127 @@ import LoadingAnimation from "./LoadingAnimation.js";
 // import scrape from "scrape.js";
 
 function FindFood() {
-  const [urls, setUrls] = useState(() => {
-    const savedUrls = localStorage.getItem("urls");
-    return savedUrls ? JSON.parse(savedUrls) : [];
-  });
-  console.log(urls.length)
-
-  const [allPantries, setAllPantries] = useState(() => {
-    const savedPantries = localStorage.getItem("allPantries");
-    return savedPantries ? JSON.parse(savedPantries) : [];
-  });
-
-  const [pantryRows, setPantryRows] = useState([]);
-  // console.log(allPantries)
-
-  useEffect(() => {
-    console.log("Component mounted");
-  }, []);
-
-  useEffect(() => {
-    const rows = allPantries.map((pantry, index) => (
-      <PantryRow key={index} pantryDetails={pantry} />
-    ));
-    setPantryRows(rows);
-  }, [allPantries]);
-
-  useEffect(() => {
-    localStorage.setItem("urls", JSON.stringify(urls));
-  }, [urls]);
-
-  useEffect(() => {
-    localStorage.setItem("allPantries", JSON.stringify(allPantries));
-  }, [allPantries]);
+  // useEffect(() => {
+  //   console.log("Component mounted");
+  // }, []);
 
   //conditionally add padding to the sunday column when height of children exceeds 163px
-  const sunday = document.getElementById("sunday-column");
-  const pantryData = document.getElementById("pantry-data");
-  if (pantryData.clientHeight > 163) {
-    // sunday.style.outline = "red 1px solid";
-    sunday.style.paddingRight = "40px";
-  }
+  // const sunday = document.getElementById("sunday-column");
+  // const pantryData = document.getElementById("pantry-data");
+  // if (pantryData.clientHeight > 163) {
+  //   // sunday.style.outline = "red 1px solid";
+  //   sunday.style.paddingRight = "40px";
+  // }
 
 
   async function handleSearch(e) {
     e.preventDefault();
-    setUrls([])
-    setAllPantries([])
+    // setUrls([])
+    // setAllPantries([])
     console.log("Submit button clicked");
     const address = e.target.address.value;
-    requestPantryUrls(address);
+    codeAddress(address);
+    
   }
 
-  async function requestPantryUrls(address) {
-    try {
-      const response = await fetch('http://localhost:8000/urls', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ address }),
-      });
-      if (response.ok) {
-        const urls = await response.json();
-        // console.log(urls)
-        setUrls(urls);
-        localStorage.setItem("urls", JSON.stringify(urls));
-        urls.forEach(url => requestPantryDetails(url));
+
+  // Initialize and add the map
+  let geocoder;
+  let map;
+
+  async function initMap() {
+    // The location of tampa
+    const tampa = { lat: 27.964157 , lng: -82.452606 };
+    // Request needed libraries.
+    const { Map } = await google.maps.importLibrary("maps");
+    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+    // The map, centered at tampa
+    map = new Map(document.getElementById("map"), {
+      zoom: 12,
+      center: tampa,
+      mapId: "DEMO_MAP_ID",
+    });
+    // Create an info window to share between markers.
+    const infoWindow = new google.maps.InfoWindow();
+    geocoder = new google.maps.Geocoder();
+
+    // The marker, positioned at tampa
+    // const marker = new google.maps.Marker({
+    //   map: map,
+    //   position: tampa,
+    //   title: "T",
+    //   // label: "Tampa",
+    //   optimized: false
+    // });
+    // marker.addListener("click", () => {
+    //   infoWindow.close();
+    //   infoWindow.setContent(marker.getTitle());
+    //   infoWindow.open(marker.getMap(), marker);
+    // });
+  }
+
+
+
+  function codeAddress(address) {
+    geocoder.geocode( { 'address': address}, function(results, status) {
+      if (status == 'OK') {
+        // const data = results.type()
+        console.log(results[0])
+        const formattedAddress = results[0].formatted_address;
+        map.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location
+        });
+        const pantries = searchPlaces()
       } else {
-        console.error('Error occurred during scraping');
+        alert('Geocode was not successful for the following reason: ' + status);
       }
-    } catch (error) {
-      console.error('Error occurred during scraping', error);
+    });
+  }
+
+  async function searchPlaces() {
+    const location = map.getCenter();
+    const { Place, SearchNearbyRankPreference } = await google.maps.importLibrary(
+      "places",
+    );
+    const request = {
+      fields: ['attributions', 'id', 'displayName', 'accessibilityOptions', 'types', 'addressComponents', 'formattedAddress', 'businessStatus', 'location', 'nationalPhoneNumber', 'rating', 'userRatingCount', 'websiteURI', 'regularOpeningHours', 'utcOffsetMinutes'],
+      locationBias: {
+        lat: location.lat(),
+        lng: location.lng()
+      },
+      textQuery: 'food pantry',
+      rankPreference: SearchNearbyRankPreference.DISTANCE,
+    };
+    const { places } = await Place.searchByText(request);
+    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+    if (places.length) {
+      console.log(places);
+  
+      const { LatLngBounds } = await google.maps.importLibrary("core");
+      const bounds = new LatLngBounds();
+  
+      // Loop through and get all the results.
+      places.forEach((place) => {
+        const markerView = new AdvancedMarkerElement({
+          map,
+          position: place.location,
+          title: place.displayName,
+        });
+  
+        bounds.extend(place.location);
+        console.log(place);
+      });
+      map.fitBounds(bounds);
+    } else {
+      console.log("No results");
     }
   }
 
-
-  async function requestPantryDetails(url) {
-    try {
-      const response = await fetch('http://localhost:8000/scrape', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ url }),
-      });
-      if (response.ok) {
-        const pantryDetails = await response.json();
-        setAllPantries(prevPantries => [...prevPantries, pantryDetails]);
-        // localStorage.setItem("allPantries", JSON.stringify(allPantries));
-        // console.log(pantryDetails) //object with pantry details
-      } else {
-        console.error('Error occurred during scraping');
-      }
-    } catch (error) {
-      console.error('Error occurred during scraping', error);
-  }}
+  initMap();
 
   return(
   <div id="food-content">
@@ -152,10 +178,11 @@ function FindFood() {
         </table>
         <div id="pantry-data">
           {/* <PantryRow />*/}
-          {pantryRows}
+          {/* {pantryRows} */}
         </div>
       </div>
     </div>
+    <div id="map"></div>
     {/* <LoadingAnimation /> */}
   </div>
   )
