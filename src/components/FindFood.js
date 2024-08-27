@@ -4,29 +4,24 @@ import LoadingAnimation from "./LoadingAnimation.js";
 // import scrape from "scrape.js";
 
 function FindFood() {
-  // useEffect(() => {
-  //   console.log("Component mounted");
-  // }, []);
-
-  //conditionally add padding to the sunday column when height of children exceeds 163px
-  // const sunday = document.getElementById("sunday-column");
-  // const pantryData = document.getElementById("pantry-data");
-  // if (pantryData.clientHeight > 163) {
-  //   // sunday.style.outline = "red 1px solid";
-  //   sunday.style.paddingRight = "40px";
-  // }
-
+  const savedCoordinates = JSON.parse(localStorage.getItem('coordinates'));
+  console.log(savedCoordinates);
+  const savedPantries = JSON.parse(localStorage.getItem('pantries'));
+  console.log(savedPantries);
 
   async function handleSearch(e) {
     e.preventDefault();
-    // setUrls([])
-    // setAllPantries([])
     console.log("Submit button clicked");
     const address = e.target.address.value;
-    codeAddress(address);
-    
-  }
+    // const coordinates = { lat: 27.964157, lng: -82.452606 }; // Tampa coordinates for testing purposes
+    const coordinates = await codeAddress(address);
+    // console.log(coordinates)
+    const pantries = await searchPlaces(coordinates);
+    // console.log(pantries);
 
+    localStorage.setItem('coordinates', JSON.stringify(coordinates));
+    localStorage.setItem('pantries', JSON.stringify(pantries));
+  }
 
   // Initialize and add the map
   let geocoder;
@@ -66,61 +61,99 @@ function FindFood() {
 
 
 
-  function codeAddress(address) {
-    geocoder.geocode( { 'address': address}, function(results, status) {
-      if (status == 'OK') {
-        // const data = results.type()
-        console.log(results[0])
-        const formattedAddress = results[0].formatted_address;
-        map.setCenter(results[0].geometry.location);
-        var marker = new google.maps.Marker({
-            map: map,
-            position: results[0].geometry.location
-        });
-        const pantries = searchPlaces()
-      } else {
-        alert('Geocode was not successful for the following reason: ' + status);
+  async function codeAddress(address) {
+    return new Promise((resolve, reject) => {
+      geocoder.geocode( { 'address': address}, function(results, status) {
+        if (status == 'OK') {
+          map.setCenter(results[0].geometry.location);
+          const lat = results[0].geometry.location.lat();
+          const lng = results[0].geometry.location.lng();
+          // console.log({ lat, lng })
+          // const pantries = searchPlaces()
+          resolve({ lat, lng });
+        } else {
+          reject('Geocode was not successful for the following reason: ' + status);
+        }
+      });
+    })
+  }
+
+  async function searchPlaces(coordinates) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const location = map.getCenter();
+        const { Place, SearchNearbyRankPreference } = await google.maps.importLibrary("places");
+        const request = {
+          fields: ['displayName', 'location', 'formattedAddress'],
+          locationBias: coordinates,
+          textQuery: 'food pantry',
+          rankPreference: SearchNearbyRankPreference.DISTANCE,
+        };
+        const { places } = await Place.searchByText(request);
+        const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+  
+        if (places.length) {
+          console.log(places);
+  
+          const { LatLngBounds } = await google.maps.importLibrary("core");
+          const bounds = new LatLngBounds();
+  
+          // Loop through and get all the results.
+          places.forEach((place) => {
+            const markerView = new AdvancedMarkerElement({
+              map,
+              position: place.location,
+              title: place.displayName,
+            });
+  
+            bounds.extend(place.location);
+            console.log(place);
+          });
+          map.fitBounds(bounds);
+          resolve(places); // Resolve the promise with the list of places
+        } else {
+          console.log("No results");
+          resolve([]); // Resolve with an empty array if no results
+        }
+      } catch (error) {
+        console.error(error);
+        reject(error); // Reject the promise if an error occurs
       }
     });
   }
 
-  async function searchPlaces() {
-    const location = map.getCenter();
-    const { Place, SearchNearbyRankPreference } = await google.maps.importLibrary(
-      "places",
-    );
-    const request = {
-      fields: ['attributions', 'id', 'displayName', 'accessibilityOptions', 'types', 'addressComponents', 'formattedAddress', 'businessStatus', 'location', 'nationalPhoneNumber', 'rating', 'userRatingCount', 'websiteURI', 'regularOpeningHours', 'utcOffsetMinutes'],
-      locationBias: {
-        lat: location.lat(),
-        lng: location.lng()
-      },
-      textQuery: 'food pantry',
-      rankPreference: SearchNearbyRankPreference.DISTANCE,
-    };
-    const { places } = await Place.searchByText(request);
-    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
-    if (places.length) {
-      console.log(places);
-  
-      const { LatLngBounds } = await google.maps.importLibrary("core");
-      const bounds = new LatLngBounds();
-  
-      // Loop through and get all the results.
-      places.forEach((place) => {
-        const markerView = new AdvancedMarkerElement({
-          map,
-          position: place.location,
-          title: place.displayName,
-        });
-  
-        bounds.extend(place.location);
-        console.log(place);
-      });
-      map.fitBounds(bounds);
-    } else {
-      console.log("No results");
+  async function postToPlaces() {
+    placesLibraryNew = "https://places.googleapis.com/v1/places:searchText"
+    try {
+      const response = await fetch(placesLibraryNew, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Goog-FieldMask': 'places.displayName, places.location, places.formattedAddress',
+          'X-Goog-Api-Key': 'AIzaSyAXSVExEObLD9tlzRg46QMc-6iZRTJjn6w',
+        },
+        body: JSON.stringify({
+          textQuery: 'food pantry',
+          rankPreference: 'DISTANCE',
+          locationRestriction: {
+            circle: {
+              center: {
+                latitude: 27.964157,
+                longitude: -82.452606
+              },
+              radius: 40233.6 // 25 miles in meters
+            }
+          },
+        }),
+      })
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+      const json = await response.json();
+      console.log(json);
+    } catch (error) {
+      console.error(error)
     }
   }
 
