@@ -9,7 +9,7 @@ import MoreResources from "./MoreResources.js";
 
 function App() {
   return (
-    <div id="root">
+    <>
       <div id="nav-bar" className="sycamore">
         <h1 id="title">Food Pantry Finder</h1>
         <NavBar />
@@ -20,20 +20,18 @@ function App() {
         <div className="mango-tango" />
         <div className="tanglow" />
       </div>
-      <div className="content">
-        <Routes>
-          <Route path="/" element={<FindFood />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/more" element={<MoreResources />} />
-        </Routes>
-      </div>
-      <div id="bottom-gradient" className="row-5">
+      <Routes>
+        <Route exact path="/" element={<FindFood />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/resources" element={<MoreResources />} />
+      </Routes>
+      <div id="bottom-gradient">
         <div className="tanglow" />
         <div className="mango-tango" />
         <div className="piper" />
       </div>
-    </div>
+    </>
 
   );
 }

@@ -15,23 +15,22 @@ Our program utilizes web-scraping to collect and organize data from google maps.
 ![Schedule](images/schedule_prototype.png)
 
 ## Existing Features
-- Asks the user for a location and then scrapes google maps for the first eight search results in that area (scrape.js -> pantries.csv)
-- Organizes scraped data into a list (list.js -> list.html)
-- Organizes scraped data into a weekly schedule (schedule.js -> schedule.html)
+- Asks the user for a location and then scrapes google maps for the top results in that area
+<!-- - Organizes scraped data into a list (list.js -> list.html)
+- Organizes scraped data into a weekly schedule (schedule.js -> schedule.html) -->
 
 ## Upcoming Features
-- Web-hosting of our front-end and virtual machine with AWS.
-  - The virtual machine will receive a data request from the front-end, carry out the web-scraping, and return the data.
-- Allow user to input their location and distance to personalize search results.
+<!-- - Web-hosting of our front-end and virtual machine with AWS.
+  - The virtual machine will receive a data request from the front-end, carry out the web-scraping, and return the data. -->
+- Allow user to filter results by distance.
 - Allow user to edit the data for inaccuracies or missing details.
 
 ## Install Dependencies (requires node.js and pipenv)
   1. npm install
   2. pipenv install
 
-## Run the Program
-  1. npm run scrape
+## Localhost the Server
+  2. node backend.js
 
-The files created by the program are located in:
-- list.html
-- schedule.html
+## Localhost the Program
+  3. npm start
