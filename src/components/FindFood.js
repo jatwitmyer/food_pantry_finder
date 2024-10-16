@@ -8,7 +8,18 @@ function FindFood() {
   const [pantryRows, setPantryRows] = useState([]);
 
 // Update State Upon Search //////////////////////////////////
-  useEffect(() => { // Fetch pantries when coordinates change
+    async function changeCoordinates(e) { // User has submitted their address. Call geocoder api and update coordinates useState when promise resolves.
+    e.preventDefault();
+    const address = e.target.address.value;
+    try {
+      const newCoordinates = await codeAddress(address);
+      setCoordinates(newCoordinates);
+    } catch (error) {
+      console.error('Error geocoding address:', error);
+    }
+  }
+  
+  useEffect(() => { // Coordinates promise has resolved. Call places api and update pantries useState when promise resolves.
     async function fetchPantries() {
       try {
         const places = await searchPlaces(coordinates);
@@ -20,17 +31,6 @@ function FindFood() {
     }
     fetchPantries();
   }, [coordinates]);
-
-  async function changeCoordinates(e) { // Update coordinates when promise resolves
-    e.preventDefault();
-    const address = e.target.address.value;
-    try {
-      const newCoordinates = await codeAddress(address);
-      setCoordinates(newCoordinates);
-    } catch (error) {
-      console.error('Error geocoding address:', error);
-    }
-  }
 /////////////////////////////////////////////////////////
 
 // Google Maps API functions ////////////////////////////
