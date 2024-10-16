@@ -7,7 +7,7 @@ function FindFood() {
   const [coordinates, setCoordinates] = useState({ lat: 27.964157, lng: -82.452606 });
   const [pantryRows, setPantryRows] = useState([]);
 
-// Update State Upon Search ////////////////////////////////////
+// Update State Upon Search //////////////////////////////////
   useEffect(() => { // Fetch pantries when coordinates change
     async function fetchPantries() {
       try {
@@ -33,31 +33,7 @@ function FindFood() {
   }
 /////////////////////////////////////////////////////////
 
-// Initialize and add the map ///////////////////////////
-  let geocoder;
-  let map;
-
-  async function initMap() {
-    // The location of tampa
-    const tampa = { lat: 27.964157 , lng: -82.452606 };
-    // Request needed libraries.
-    const { Map } = await google.maps.importLibrary("maps");
-    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
-
-    // The map, centered at tampa
-    map = new Map(document.getElementById("map"), {
-      zoom: 12,
-      center: coordinates,
-      mapId: "DEMO_MAP_ID",
-    });
-
-    // Create an info window to share between markers.
-    const infoWindow = new google.maps.InfoWindow();
-    geocoder = new google.maps.Geocoder();
-  }
-/////////////////////////////////////////////////
-
-// Google Maps API functions /////////////////////
+// Google Maps API functions ////////////////////////////
   async function codeAddress(address) { // Query google geocoder api for coordinates of address
     return new Promise((resolve, reject) => {
       geocoder.geocode( { 'address': address}, function(results, status) {
@@ -93,9 +69,34 @@ function FindFood() {
       }
   })
   }
-///////////////////////////////////////////////
+////////////////////////////////////////////////////////
+
+// Initialize and add the map ///////////////////////////
+  let geocoder;
+  let map;
+
+  async function initMap() {
+    // The location of tampa
+    const tampa = { lat: 27.964157 , lng: -82.452606 };
+    // Request needed libraries.
+    const { Map } = await google.maps.importLibrary("maps");
+    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+    // The map, centered at tampa
+    map = new Map(document.getElementById("map"), {
+      zoom: 12,
+      center: coordinates,
+      mapId: "DEMO_MAP_ID",
+    });
+
+    // Create an info window to share between markers.
+    const infoWindow = new google.maps.InfoWindow();
+    geocoder = new google.maps.Geocoder();
+  }
 
   initMap();
+/////////////////////////////////////////////////
+  
 
   return(
   <div id="food-content">
